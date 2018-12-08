@@ -39,7 +39,7 @@ export const nextChar = (string: string) => {
   return adjacent(string, 1);
 };
 
-export const humanReadable = (string: string) => {
+export const readable = (string: string) => {
   return trueTrim(string)
     .replace(/([a-z\d])([A-Z]+)/g, '$1_$2')
     .replace(/[-\s]+/g, '_')
@@ -91,17 +91,23 @@ export const mask = ({ text, pad = 4, mask = '*' }: Mask) => `${text}`.slice(-pa
 
 export const reverse = (string: string) => string.split('').reduce((rev: string, char: string) => `${char}${rev}`, '');
 
-export const capitalize = (string: string) => {
-  return string
-    .trim()
-    .toLowerCase()
-    .replace(/\b[a-z]/g, (char: string) => char.toUpperCase());
+export const capitalize = ([char, ...chars]: string) => char.toUpperCase() + chars.join('').toLowerCase();
+
+export const titlelize = (string: string, preserve: boolean = false) => {
+  const words = string.split(' ');
+  return words
+    .reduce((acc: string, curr: string) => {
+      const first = curr.substring(0, 1).toUpperCase();
+      const second = curr.substring(1);
+      return preserve ? `${acc}${first}${second} ` : `${acc}${first}${second.toLowerCase()} `;
+    }, '')
+    .trim();
 };
 
 export const replaceAll = (replace: Replace) => replace.text.replace(new RegExp(replace.expr, 'g'), replace.new);
 
 export const brazilize = (string: string) => {
-  return capitalize(string)
+  return titlelize(string)
     .replace(' De ', ' de ')
     .replace(' Da ', ' da ')
     .replace(' Do ', ' do ')
@@ -146,13 +152,13 @@ export default {
   mask,
   reverse,
   replaceAll,
-  capitalize,
+  capitalize: titlelize,
   padding,
   bothPadding,
   leftPadding,
   rightPadding,
   truncate,
-  humanReadable,
+  humanReadable: readable,
   trueTrim,
   nextChar,
   previousChar,

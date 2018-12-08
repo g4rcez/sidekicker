@@ -20,5 +20,4 @@ const Tr = (tr: TR) => {
   return tr.text;
 };
 
-const s = Tr({ text: 'Allan Garcez', subs1: 'Aa', subs2: 'ac' });
-console.log(s);
+export default Tr;

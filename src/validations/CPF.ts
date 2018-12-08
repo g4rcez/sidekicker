@@ -1,6 +1,16 @@
 import { CPF } from '../regex/BrazilianRegex';
 import { toInt, onlyNumbers } from '../strings/Transform';
 import { equals } from '../comparable/Numbers';
+import CpfValidator from 'CpfValidator';
+import generic from './GenericValidator';
+import { containsChars } from '../regex/GenericRegex';
+
+interface cpfFunctions {
+  mask: Function;
+  digit: Function;
+  states: Function;
+  [key: string]: Function;
+}
 
 const ufPerNinthDigit = [
   ['RS'],
@@ -15,18 +25,22 @@ const ufPerNinthDigit = [
   ['PR', 'SC'],
 ];
 
-const cpfAlgo = (string: string) => {
-  let numbers, digits, sum, i, result, sames;
-  sames = 1;
-  const cpf = onlyNumbers(string);
+const cpfAlgo = (cpf: string) => {
+  let numbers = '',
+    digits = '',
+    sum = 0,
+    i = 0,
+    result = 0,
+    sames = 1;
   if (cpf.length < 11 || cpf === '00000000000') {
     return false;
   }
-  for (i = 0; i < cpf.length - 1; i++)
+  for (i = 0; i < cpf.length - 1; i++) {
     if (cpf.charAt(i) != cpf.charAt(i + 1)) {
       sames = 0;
       break;
     }
+  }
   if (!sames) {
     numbers = cpf.substring(0, 9);
     digits = cpf.substring(9);
@@ -44,50 +58,31 @@ const cpfAlgo = (string: string) => {
       sum += toInt(numbers.charAt(11 - i)) * i;
     }
     result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-    return !equals(result, digits.charAt(1));
+    return equals(result, digits.charAt(1));
   }
   return false;
 };
-
-interface CpfValidator {
-  states?: string[];
-  digit?: number;
-  validMask?: boolean;
-}
-
-const validateByUF = (cpf: string, states: string[]) => {
-  const ninthDigit = toInt(cpf[8]);
-  const array: string[] = ufPerNinthDigit[ninthDigit];
-  for (let i = 0; i < states.length; i += 1) {
-    if (array.includes(states[i])) {
-      return true;
-    }
-  }
-  return false;
-};
-
-const validateByDigit = (cpf: string, digit: number) => equals(cpf[8], digit);
-const validateWithMask = (cpf: string) => !!CPF.test(cpf);
+const ninthDigit = (cpf: string) => onlyNumbers(cpf)[8];
 
 const isCpf = (cpf: string, rules?: CpfValidator) => {
-  if (rules.digit && rules.validMask && rules.states) {
-    const rulesTrue = validateByUF(cpf, rules.states) && validateByDigit(cpf, rules.digit) && validateWithMask(cpf);
-    return cpfAlgo(cpf) && rulesTrue;
-  } else if (rules.digit && rules.validMask) {
-    const rulesTrue = validateByDigit(cpf, rules.digit) && validateWithMask(cpf);
-    return rulesTrue && cpfAlgo(cpf);
-  } else if (rules.digit && rules.states) {
-    const rulesTrue = validateByUF(cpf, rules.states) && validateByDigit(cpf, rules.digit) && validateWithMask(cpf);
-    return rulesTrue && cpfAlgo(cpf);
-  } else if (rules.states && rules.validMask) {
-    const rulesTrue = validateByUF(cpf, rules.states) && validateByDigit(cpf, rules.digit);
-    return rulesTrue && cpfAlgo(cpf);
-  } else if (rules.validMask) {
-    return validateWithMask(cpf) && cpfAlgo(cpf);
-  } else if (rules.states) {
-    return validateByUF(cpf, rules.states) && cpfAlgo(cpf);
+  const functions: cpfFunctions = {
+    mask: (cpf: string) => !!CPF.test(cpf),
+    digit: (cpf: string, digit: number) => equals(ninthDigit(cpf), digit),
+    states: (cpf: string, states: string[]) => {
+      const ninth = toInt(ninthDigit(cpf));
+      const array: string[] = ufPerNinthDigit[ninth];
+      for (let i = 0; i < states.length; i += 1) {
+        if (array.includes(states[i])) {
+          return true;
+        }
+      }
+      return false;
+    },
+  };
+  if (containsChars.test(cpf)) {
+    return false;
   }
-  return cpfAlgo(cpf);
+  return cpfAlgo(onlyNumbers(cpf)) && generic(rules, cpf, functions);
 };
 
 export default isCpf;

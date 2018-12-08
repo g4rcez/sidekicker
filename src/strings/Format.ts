@@ -1,7 +1,6 @@
-import moment from 'moment';
-import { CEP } from '~Regex/BrazilianRegex';
+import { CEP } from '../regex/BrazilianRegex';
 
-export const cep = (text: string) => (CEP.test(text) ? text.trim().replace(CEP, '$1$2-$3') : text.trim());
+export const cep = (text: string) => text.trim().replace(CEP, '$1$2-$3');
 
 export const cpf = (string: string) => {
   return string
@@ -15,12 +14,4 @@ export const decimals = (target: string | number, places: number) => {
   return parseFloat(target.toString()).toFixed(places);
 };
 
-export const epochToDate = (epoch: number, format = 'YYYY-MM-dd') => {
-  return moment.unix(epoch).format(format);
-};
-
-export default {
-  epochToDate,
-  cpf,
-  cep,
-};
+export default { cpf, cep };

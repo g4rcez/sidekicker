@@ -1,39 +1,28 @@
 import { email } from '../regex/WebRegex';
 import regExpEscape from '../regex/RegExpEscape';
+import generic from './GenericValidator';
+import EmailValidation from '../types/EmailValidation';
 
-interface EmailValidation {
-  domain?: string;
-  notIncludeChars?: string;
-  namePattern?: string;
+interface emailFunctions {
+  domain: Function;
+  notIncludeChars: Function;
+  namePattern: Function;
+  [key: string]: Function;
 }
 
-const withoutDisallowed = (rules: string, string: string) => {
-  const notPermittedArray = [...rules] || [];
-  const errors = notPermittedArray.filter((x) => string.search(x) === -1).filter(Boolean);
-  return notPermittedArray.length === errors.length;
+const functions: emailFunctions = {
+  domain: (email: string, domain: string) => new RegExp(`@${domain}$`).test(email),
+  notIncludeChars: (email: string, rules: string) => {
+    const notInclude = [...rules] || [];
+    const errors = notInclude.filter((x) => email.search(x) === -1).filter(Boolean);
+    return notInclude.length === errors.length;
+  },
+  namePattern: (email: string, pattern: string) => new RegExp(regExpEscape(`^${pattern}@`)).test(email),
 };
 
-const isEmail = (string: string, rules?: EmailValidation) => {
+const Email = (string: string, rules?: EmailValidation) => {
   const test = !!email.test(string);
-  if (rules.domain && rules.notIncludeChars && rules.namePattern) {
-    const testDomain = new RegExp(`${rules.domain}$`).test(string);
-    const pattern = new RegExp(regExpEscape(`^${rules.namePattern}@`));
-    const allowedTest = withoutDisallowed(rules.notIncludeChars, string);
-    const patternTest = pattern.test(string);
-    return test && allowedTest && patternTest && testDomain;
-  }
-  if (rules.notIncludeChars) {
-    return test && withoutDisallowed(rules.notIncludeChars, string);
-  }
-  if (rules.domain) {
-    const testDomain = new RegExp(`${rules.domain}$`).test(string);
-    return test && testDomain;
-  }
-  if (rules.namePattern) {
-    const pattern = new RegExp(regExpEscape(`^${rules.namePattern}@`));
-    return test && pattern.test(string);
-  }
-  return test;
+  return test && generic(rules, string, functions);
 };
 
-export default isEmail;
+export default Email;

@@ -81,5 +81,7 @@ typings/
 .fusebox/
 
 lib/
+yarn.lock
+package-lock.json
 
 # End of https://www.gitignore.io/api/node

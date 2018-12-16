@@ -1,42 +1,45 @@
 {
-  "name": "j-arvi-s",
-  "version": "0.0.1",
-  "description": "An abstract lib to help in my JS/TS projects",
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "jest",
-    "watch-node": "nodemon lib/index.js",
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-    "watch-ts": "tsc -w",
-    "build": "tsc",
-    "start": "npm run watch"
-  },
-  "author": "vandalvnl",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "bluebird": "^3.5.3",
-    "moment": "^2.22.2",
-    "ramda": "^0.25.0",
-    "util": "^0.11.1"
-  },
-  "devDependencies": {
-    "@types/bluebird": "^3.5.24",
-    "@types/jest": "^23.3.10",
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.6.0",
-    "concurrently": "^4.0.1",
-    "jest": "^23.6.0",
-    "nock": "^10.0.2",
-    "nodemon": "^1.18.6",
-    "regenerator-runtime": "^0.13.1",
-    "ts-jest": "^23.10.5",
-    "typescript": "^3.1.6"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/__utils"
-    ]
-  }
+    "name": "sidekicker",
+    "version": "0.0.2",
+    "description": "An abstract lib to help in our JS/TS projects",
+    "main": "lib/index.js",
+    "scripts": {
+        "test": "jest",
+        "watch-node": "nodemon lib/index.js",
+        "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+        "watch-ts": "tsc -w",
+        "build": "tsc",
+        "start": "npm run watch"
+    },
+    "author": "vandalvnl",
+    "repository": {
+        "type": "github",
+        "url": "https://github.com/vandalvnl/sidekicker"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^0.18.0",
+        "moment": "^2.22.2",
+        "query-string": "^6.2.0",
+        "ramda": "^0.25.0"
+    },
+    "devDependencies": {
+        "@types/bluebird": "^3.5.24",
+        "@types/jest": "^23.3.10",
+        "babel-core": "^6.26.3",
+        "babel-jest": "^23.6.0",
+        "concurrently": "^4.0.1",
+        "jest": "^23.6.0",
+        "nock": "^10.0.2",
+        "nodemon": "^1.18.6",
+        "regenerator-runtime": "^0.13.1",
+        "ts-jest": "^23.10.5",
+        "typescript": "^3.1.6"
+    },
+    "jest": {
+        "testPathIgnorePatterns": [
+            "/node_modules/",
+            "/__utils"
+        ]
+    }
 }

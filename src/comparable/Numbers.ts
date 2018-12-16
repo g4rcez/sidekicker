@@ -1,4 +1,4 @@
-import { toInt } from './../strings/Transform';
+import { toInt } from '../strings/Utils';
 export const greaterThan = (greater: number | string, less: number | string) => {
   return toInt(greater) > toInt(less);
 };

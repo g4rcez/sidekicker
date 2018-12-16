@@ -1,2 +1,2 @@
-export const onlyDigit = /^\d+9$/
-export const containsChars = /[a-záàãéèẽíìĩóòõúùũâêîôû]/gi
+export const onlyDigit = /^[0-9]+$/g
+export const onlyChars = /[a-záàãéèẽíìĩóòõúùũâêîôû]+/gi

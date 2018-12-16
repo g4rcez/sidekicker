@@ -1,4 +1,4 @@
-export default interface OrdersRules {
-  caseSensitive?: Boolean;
-  reverseOrder?: Boolean;
-}
+export type OrdersRules = {
+    caseSensitive?: Boolean;
+    reverseOrder?: Boolean;
+};

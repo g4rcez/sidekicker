@@ -1,11 +1,11 @@
-import { executeByOperator } from './Operator';
-import WhereOperator from '../../types/WhereOperator';
+import { executeByOperator } from "./Operator";
+import { WhereOperator } from "../../types/WhereOperator";
 
-const where = (operator: WhereOperator) => {
-  return (array: any[]) =>
-    array.filter((x) => {
-      return executeByOperator(x[operator.key], operator.operator, operator.value);
-    });
+const where = (values: WhereOperator) => {
+    return (array: any[]) =>
+        array.filter((element) => {
+            return executeByOperator(element[values.key], values.operator, values.value);
+        });
 };
 
 export default where;

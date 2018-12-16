@@ -1,4 +1,4 @@
-import Transform from '../Transform';
+import Transform from '../Utils';
 
 interface Cut {
   text: string;

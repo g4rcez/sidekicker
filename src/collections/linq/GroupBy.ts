@@ -1,14 +1,13 @@
 const groupBy = (key: string) => (array: any[]) => {
-  const group: any = {};
-  array.forEach((x) => {
-    const name = x[key];
-    if (group[name]) {
-      group[name] = [...group[name], x];
-    } else {
-      group[name] = [x];
-    }
-  });
-  return group;
+    return array.reduce((accumulator, element) => {
+        const name = element[key];
+        if (accumulator[name]) {
+            accumulator[name] = [...accumulator[name], element];
+        } else {
+            accumulator[name] = [element];
+        }
+        return accumulator;
+    }, {});
 };
 
-export default groupBy
+export default groupBy;

@@ -139,6 +139,8 @@ export const trueTrim = (string: string) => string.trim().replace(/\s\s+/g, " ")
 
 export const toInt = (string: any) => string >> 0;
 
+export const toFloat = (string: string | number) => Number.parseFloat(`${string}`);
+
 export const onlyNumbers = (string: string) => string.replace(/[^\d]/g, "");
 
 export const onlyChars = (string: string) => string.replace(/[^a-záàãéèẽíìĩóòõúùũâêîôû]+/gi, "");

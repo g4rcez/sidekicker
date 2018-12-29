@@ -1,5 +1,6 @@
 const equals = (target: any, value: any) => {
-  // try something
-  return false;
+    if (typeof target === typeof value) {
+        return true;
+    }
+    return false;
 };
-export default equals;

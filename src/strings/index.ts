@@ -1,5 +1,6 @@
 import Cut from "./unix/Cut";
 import Tr from "./unix/Tr";
+import { objectParameters, extractParameters } from "./Url";
 import { decimals, cep, cpf } from "./Format";
 import {
     capitalize,
@@ -54,4 +55,6 @@ export {
     Cut,
     Tr,
     onlyChars,
+    objectParameters,
+    extractParameters,
 };

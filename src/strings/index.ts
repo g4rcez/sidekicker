@@ -1,60 +1,6 @@
-import Cut from "./unix/Cut";
-import Tr from "./unix/Tr";
-import { objectParameters, extractParameters } from "./Url";
-import { decimals, cep, cpf } from "./Format";
-import {
-    capitalize,
-    titlelize,
-    onlyChars,
-    brazilize,
-    convert,
-    truncate,
-    trueTrim,
-    toInt,
-    sneakize,
-    slugify,
-    rightPadding,
-    leftPadding,
-    reverse,
-    camelize,
-    readable,
-    mask,
-    onlyNumbers,
-    nextChar,
-    previousChar,
-    padding,
-    replaceAll,
-    bothPadding,
-} from "./Utils";
-
-export {
-    titlelize,
-    capitalize,
-    brazilize,
-    convert,
-    truncate,
-    trueTrim,
-    toInt,
-    sneakize,
-    slugify,
-    rightPadding,
-    leftPadding,
-    reverse,
-    camelize,
-    readable,
-    mask,
-    onlyNumbers,
-    nextChar,
-    previousChar,
-    padding,
-    replaceAll,
-    bothPadding,
-    decimals,
-    cep,
-    cpf,
-    Cut,
-    Tr,
-    onlyChars,
-    objectParameters,
-    extractParameters,
-};
+export * from "./unix/Cut";
+export * from "./unix/Tr";
+export * from './Format'
+export * from "./Url";
+export * from "./Format";
+export * from "./Utils";

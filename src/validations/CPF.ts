@@ -3,7 +3,7 @@ import { toInt, onlyNumbers } from "../strings/Utils";
 import { equals } from "../comparable/Numbers";
 import { CpfValidator } from "CpfValidator";
 import generic from "./GenericValidator";
-import { onlyChars } from "../regex/GenericRegex";
+import { ONLY_CHARS } from "../regex/GenericRegex";
 
 interface cpfFunctions {
     mask: Function;
@@ -79,7 +79,7 @@ const isCpf = (cpf: string, rules?: CpfValidator) => {
             return false;
         },
     };
-    if (onlyChars.test(cpf)) {
+    if (ONLY_CHARS.test(cpf)) {
         return false;
     }
     return cpfAlgo(onlyNumbers(cpf)) && generic(rules, cpf, functions);

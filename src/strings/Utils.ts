@@ -1,4 +1,4 @@
-import { onlyDigit } from "../regex/GenericRegex";
+import { ONLY_DIGIT } from "../regex/GenericRegex";
 
 interface Separator {
     text: string;

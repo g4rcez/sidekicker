@@ -9,6 +9,7 @@ export const findByKey = (prop: string, object: any): any => {
             return findByKey(prop, object[x]);
         }
     }
+    return undefined;
 };
 
 const isObject = (val: any) => typeof val == "object" && !Array.isArray(val);

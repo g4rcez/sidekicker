@@ -1,11 +1,18 @@
 import { WhereOperator } from "./WhereOperator";
 import { OrdersRules } from "./OrderByParameters";
 
-export type Linqs = {
-    where(conditions: WhereOperator): Linqs;
-    paginate(range: number, page: number): Linqs;
+export type Linqs<T> = {
+    average(key: string): number;
+    get(): T[];
     groupBy(key: string): Function;
-    orderBy(key: string, rules?: OrdersRules): Linqs;
-    execute(): any[];
-    run(): any[];
+    head(): T;
+    join(array: T[]): Linqs<T>;
+    map(fn: Function): Linqs<T>;
+    orderBy(key: string, rules?: OrdersRules): Linqs<T>;
+    paginate(range: number, page: number): Linqs<T>;
+    reverse(): Linqs<T>;
+    select(): T[];
+    sum(key: string): number;
+    tail(): T;
+    where(conditions: WhereOperator): Linqs<T>;
 };

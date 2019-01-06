@@ -14,5 +14,3 @@ export const arrToObj = (arr: any[]) =>
     arr.reduce((acc, el) => {
         return { ...acc, el };
     }, {});
-
-console.log(concat([1], [2], [4], [5], [6, 5]));

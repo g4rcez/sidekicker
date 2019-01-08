@@ -1,4 +1,4 @@
-export const findByKey = (prop: string, object: any): any => {
+export function findByKey(prop: string, object: any): any {
     for (let x of Object.keys(object)) {
         if (prop === x) {
             return {
@@ -10,11 +10,11 @@ export const findByKey = (prop: string, object: any): any => {
         }
     }
     return undefined;
-};
+}
 
 const isObject = (val: any) => typeof val == "object" && !Array.isArray(val);
 
-export const defaults = (defaults: any, values: any) => {
+export function defaults(defaults: any, values: any) {
     const newValues = { ...values };
     Object.keys(defaults).forEach((some) => {
         const val = defaults[some];
@@ -27,9 +27,9 @@ export const defaults = (defaults: any, values: any) => {
         }
     });
     return newValues;
-};
+}
 
-export const get = (from: object, ...selectors: string[]) => {
+export function get(from: object, ...selectors: string[]) {
     const result = [...selectors].map((selected) =>
         selected
             .replace(/\[([^\[\]]*)\]/g, ".$1.")
@@ -38,4 +38,4 @@ export const get = (from: object, ...selectors: string[]) => {
             .reduce((prev: any, cur) => prev && prev[cur], from),
     );
     return result.length === 1 ? result[0] : result;
-};
+}

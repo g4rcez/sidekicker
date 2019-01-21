@@ -1,8 +1,8 @@
-interface genericFunction {
+type GenericFunction = {
     [key: string]: Function;
-}
+};
 
-const generic = (rules: any, value: any, functions: genericFunction) => {
+const generic = (rules: any, value: any, functions: GenericFunction) => {
     if (rules) {
         const srcTrue: Boolean[] = [];
         Object.keys(rules).forEach((name: string) => {

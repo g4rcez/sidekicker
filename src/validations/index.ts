@@ -1,7 +1,4 @@
-import CPF from "./CPF";
-import Email from "./Email";
-
-export default {
-    CPF,
-    Email,
-};
+export * from "./CPF";
+export * from "./Email";
+export * from "./Validator";
+export * from "./IsUrl";

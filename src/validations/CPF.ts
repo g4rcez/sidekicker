@@ -1,11 +1,13 @@
-import { CPF } from "../regex/BrazilianRegex";
-import { toInt, onlyNumbers } from "../strings/Utils";
-import { equals } from "../comparable/Numbers";
 import { CpfValidator } from "CpfValidator";
+import { equals } from "@cmp/Numbers";
+import { REGEX_CPF } from "@regex/BrazilianRegex";
+import { ONLY_CHARS } from "@regex/GenericRegex";
+import { utils } from "@str/Utils";
 import generic from "./GenericValidator";
-import { ONLY_CHARS } from "../regex/GenericRegex";
 
-interface cpfFunctions {
+const { toInt, onlyNumbers } = utils;
+
+interface ICpfFunctions {
     mask: Function;
     digit: Function;
     states: Function;
@@ -26,17 +28,17 @@ const ufPerNinthDigit = [
 ];
 
 const cpfAlgo = (cpf: string) => {
-    let numbers = "",
-        digits = "",
-        sum = 0,
-        i = 0,
-        result = 0,
-        sames = 1;
+    let numbers = "";
+    let digits = "";
+    let sum = 0;
+    let i = 0;
+    let result = 0;
+    let sames = 1;
     if (cpf.length < 11 || cpf === "00000000000") {
         return false;
     }
     for (i = 0; i < cpf.length - 1; i++) {
-        if (cpf.charAt(i) != cpf.charAt(i + 1)) {
+        if (cpf.charAt(i) !== cpf.charAt(i + 1)) {
             sames = 0;
             break;
         }
@@ -64,15 +66,15 @@ const cpfAlgo = (cpf: string) => {
 };
 const ninthDigit = (cpf: string) => onlyNumbers(cpf)[8];
 
-const isCpf = (cpf: string, rules?: CpfValidator) => {
-    const functions: cpfFunctions = {
-        mask: (cpf: string) => !!CPF.test(cpf),
-        digit: (cpf: string, digit: number) => equals(ninthDigit(cpf), digit),
-        states: (cpf: string, states: string[]) => {
-            const ninth = toInt(ninthDigit(cpf));
+export function isCpf(cpf: string, rules?: CpfValidator) {
+    const functions: ICpfFunctions = {
+        digit: (string: string, digit: number) => equals(ninthDigit(string), digit),
+        mask: (string: string) => !!REGEX_CPF.test(string),
+        states: (string: string, states: string[]) => {
+            const ninth = toInt(ninthDigit(string));
             const array: string[] = ufPerNinthDigit[ninth];
-            for (let i = 0; i < states.length; i += 1) {
-                if (array.includes(states[i])) {
+            for (const state of states) {
+                if (array.includes(state)) {
                     return true;
                 }
             }
@@ -83,6 +85,4 @@ const isCpf = (cpf: string, rules?: CpfValidator) => {
         return false;
     }
     return cpfAlgo(onlyNumbers(cpf)) && generic(rules, cpf, functions);
-};
-
-export default isCpf;
+}

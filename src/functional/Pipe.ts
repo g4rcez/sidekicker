@@ -1,5 +1,7 @@
-export const right = (...fns: Function[]) => fns.reduce((f, g) => (...args: any) => g(f(...args)));
+export function composeRight(...fns: Function[]) {
+    return fns.reduce((f, g) => (...args: any) => g(f(...args)));
+}
 
-export const left = (...fns: Function[]) => fns.reduce((f, g) => (...args: any) => f(g(...args)));
-
-export default { right, left };
+export function composeLeft(...fns: Function[]) {
+    return fns.reduce((f, g) => (...args: any) => f(g(...args)));
+}

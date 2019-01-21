@@ -1,3 +1,3 @@
 export * from "./Equals";
-export * from "./Numbers";
-export * from "./Strings";
+export { numbers } from "./Numbers";
+export { strings } from "./Strings";

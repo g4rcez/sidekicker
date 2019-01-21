@@ -1,29 +1,30 @@
-const equals = (string: string, compare: string) => {
-  return string === compare;
-};
+export function strEquals(string: string, compare: string) {
+    return string === compare;
+}
 
-const equalsCaseInsensitive = (string: string, compare: string) => {
-  return string.toLowerCase() === compare.toLowerCase();
-};
+export function equalsCaseInsensitive(string: string, compare: string) {
+    return string.toLowerCase() === compare.toLowerCase();
+}
 
-const firstAlphabeticalOrder = (first: string, second: string, caseSensitive: boolean = true) => {
-  if (caseSensitive) {
-    return first < second;
-  }
-  return first.toLowerCase() < second.toLowerCase();
-};
+export function firstAlphabeticalOrder(first: string, second: string, caseSensitive: boolean = true) {
+    if (caseSensitive) {
+        return first < second;
+    }
+    return first.toLowerCase() < second.toLowerCase();
+}
 
-const firstAlphabeticalOrderInsensitive = (first: string, second: string) => {
-  return firstAlphabeticalOrder(first, second, false);
-};
-const firstAlphabeticalOrderSensitive = (first: string, second: string) => {
-  return firstAlphabeticalOrder(first, second);
-};
+export function firstAlphabeticalOrderInsensitive(first: string, second: string) {
+    return firstAlphabeticalOrder(first, second, false);
+}
 
-export default {
-  equals,
-  equalsCaseInsensitive,
-  firstAlphabeticalOrder,
-  firstAlphabeticalOrderSensitive,
-  firstAlphabeticalOrderInsensitive,
+export function firstAlphabeticalOrderSensitive(first: string, second: string) {
+    return firstAlphabeticalOrder(first, second);
+}
+
+export const strings = {
+    equalsCaseInsensitive,
+    firstAlphabeticalOrder,
+    firstAlphabeticalOrderInsensitive,
+    firstAlphabeticalOrderSensitive,
+    strEquals,
 };

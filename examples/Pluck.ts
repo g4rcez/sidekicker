@@ -1,4 +1,4 @@
-import { pluck } from "../src";
+import { pluck } from "../lib/iterable";
 
 const arr = [
     { id: 1, num: Math.random() },

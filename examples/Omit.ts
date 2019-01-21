@@ -1,4 +1,4 @@
-import { omit } from "../src/collections";
+import { omit } from "../lib/iterable";
 
 const some = {
     age: 12,

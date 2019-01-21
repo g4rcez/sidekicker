@@ -1,4 +1,4 @@
-import { Linq } from "../lib";
+import { Linq } from "../lib/iterable";
 
 const list = Linq([
     { id: 1, value: 50 },

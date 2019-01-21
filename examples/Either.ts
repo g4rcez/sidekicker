@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { Either, TryCatch } from "../lib";
+import { Either, TryCatch } from "../lib/functional";
 
 const url = "https://restcountries.eu/rest/v2/name/brazil";
 

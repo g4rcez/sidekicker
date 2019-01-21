@@ -38,7 +38,7 @@
         "no-var-keyword": true,
         "number-literal-format": true,
         "one-variable-per-declaration": true,
-        "ordered-imports": true,
+        "ordered-imports": false,
         "prefer-const": true,
         "prefer-method-signature": true,
         "promise-function-async": true,

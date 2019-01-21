@@ -1,21 +1,45 @@
 import moment, { MomentSetObject } from "moment";
 
-export const isAfter = (value: string | MomentSetObject, target: string | MomentSetObject) =>
-    moment(value).isAfter(moment(target));
+export function isAfter(value: string | MomentSetObject, target: string | MomentSetObject) {
+    return moment(value).isAfter(moment(target));
+}
 
-export const isBefore = (value: string | MomentSetObject, target: string | MomentSetObject) =>
-    moment(value).isBefore(moment(target));
+export function isSameOrAfter(value: string | MomentSetObject, target: string | MomentSetObject) {
+    return moment(value).isSameOrAfter(moment(target));
+}
 
-export const tomorrow = (dateCompare: string) => moment(dateCompare).isAfter(moment(), "day");
+export function isBefore(value: string | MomentSetObject, target: string | MomentSetObject) {
+    return moment(value).isBefore(moment(target));
+}
 
-export const yesterday = (dateCompare: string) => moment(dateCompare).isBefore(moment(), "day");
+export function isSameOrBefore(value: string | MomentSetObject, target: string | MomentSetObject) {
+    return moment(value).isSameOrBefore(moment(target));
+}
 
-export const today = (dateCompare: string) => moment(dateCompare).isSame(moment(), "day");
+export function tomorrow(dateCompare: string) {
+    return moment(dateCompare).isAfter(moment(), "day");
+}
 
-export const sameDay = (date: string) => moment(date).isSame(moment(), "day");
+export function yesterday(dateCompare: string) {
+    return moment(dateCompare).isBefore(moment(), "day");
+}
 
-export const sameWeek = (date: string) => moment(date).isSame(moment(), "week");
+export function today(dateCompare: string) {
+    return moment(dateCompare).isSame(moment(), "day");
+}
 
-export const sameMouth = (date: string) => moment(date).isSame(moment(), "month");
+export function sameDay(date: string) {
+    return moment(date).isSame(moment(), "day");
+}
 
-export const sameYear = (date: string) => moment(date).isSame(moment(), "year");
+export function sameWeek(date: string) {
+    return moment(date).isSame(moment(), "week");
+}
+
+export function sameMouth(date: string) {
+    return moment(date).isSame(moment(), "month");
+}
+
+export function sameYear(date: string) {
+    return moment(date).isSame(moment(), "year");
+}

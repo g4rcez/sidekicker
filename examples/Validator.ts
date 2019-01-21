@@ -1,4 +1,4 @@
-import { Validator, ValidatorRules } from "../src/validations";
+import { Validator, ValidatorRules } from "../lib";
 const person = {
     email: "ci@cla.no",
     name: "FooBar Lano",

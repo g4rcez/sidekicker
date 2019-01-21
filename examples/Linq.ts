@@ -1,14 +1,14 @@
-import { Linq } from "../src/";
+import { Linq } from "../lib";
 
 const list = Linq([
-    { foo: "bar", id: 1, value: 500 },
-    { foo: "bar", id: 2, value: 1050 },
-    { foo: "bar", id: 2, value: 1050 },
-    { foo: "bar", id: 2, value: 1050 },
-    { foo: "bar", id: 2, value: 1050 },
-    { foo: "bar", id: 3, value: 750 },
-    { foo: "bar", id: 4, value: 501 },
-    { foo: "bar", id: 4, value: 502 },
+    { id: 1, value: 50 },
+    { id: 2, value: 50 },
+    { id: 3, value: 50 },
+    { id: 4, value: 50 },
+    { id: 5, value: 50 },
+    { id: 6, value: 50 },
+    { id: 7, value: 50 },
+    { id: 8, value: 50 },
 ])
     .where({
         key: "value",
@@ -19,3 +19,4 @@ const list = Linq([
     .reverse()
     .orderBy("value");
 console.log(list.select());
+console.log(list.sum("value"));

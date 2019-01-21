@@ -1,6 +1,5 @@
 export * from "./unix/Cut";
 export * from "./unix/Tr";
-export * from './Format'
-export * from "./Url";
-export * from "./Format";
-export * from "./Utils";
+export { url } from "./Url";
+export { format } from "./Format";
+export { utils } from "./Utils";

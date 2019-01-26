@@ -1,4 +1,4 @@
-import { toFloat } from "../strings/Utils";
+import { toFloat } from "@str/Utils";
 
 export function greaterThan(greater: number | string, less: number | string) {
     return toFloat(greater) > toFloat(less);

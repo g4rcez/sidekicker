@@ -3,7 +3,6 @@ interface IState {
     state: string;
 }
 
-// tslint:disable-next-line:array-type
 const states: IState[] = [
     { uf: "AC", state: "Acre" },
     { uf: "AL", state: "Alagoas" },
@@ -31,7 +30,7 @@ const states: IState[] = [
     { uf: "SC", state: "Santa Catarina" },
     { uf: "SP", state: "São Paulo" },
     { uf: "SE", state: "Sergipe" },
-    { uf: "TO", state: "Tocantins" },
+    { uf: "TO", state: "Tocantins" }
 ];
 
 export default states;

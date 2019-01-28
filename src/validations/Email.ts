@@ -1,5 +1,5 @@
-import regExpEscape from "@regex/RegExpEscape";
-import { email } from "@regex/WebRegex";
+import regExpEscape from "../regex/RegExpEscape";
+import { email } from "../regex/WebRegex";
 import { EmailValidation } from "EmailValidation";
 import generic from "./GenericValidator";
 

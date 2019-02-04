@@ -158,8 +158,8 @@ export function toInt(string: any) {
     return string >> 0;
 }
 
-export function toFloat(string: string | number) {
-    return Number.parseFloat(`${string}`);
+export function toFloat(string: string | number, expoent: number = 2) {
+    return Number.parseFloat(Number.parseFloat(`${string}`).toExponential(expoent));
 }
 
 export function onlyNumbers(string: string) {

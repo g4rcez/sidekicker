@@ -1,4 +1,4 @@
-import { isUrl } from "../lib/validations";
+import { isUrl } from "../src/validations";
 
 [
     "https://translate.google.com/?hl=pt-BR#view=home&op=translate&sl=auto&tl=pt&text=too",
@@ -7,3 +7,11 @@ import { isUrl } from "../lib/validations";
     // "github.com/vandalvnl/sidekicker",
     // "mysql://github.com/vandalvnl/sidekicker",
 ].forEach((x) => console.log(isUrl(x, { domain: "google.com", protocols: ["ws", "mysql"], maxRoutes: 2 }), x));
+
+const ok = isUrl("https://github.com/vandalvnl/sidekicker", {
+    maxRoutes: 3,
+    protocols: ["ws"],
+    domain: "github.com",
+});
+
+console.log(ok);

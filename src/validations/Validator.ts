@@ -31,7 +31,7 @@ export function Validator<T>(
     options?: ValidatorOptions
 ) {
     const validated: ValidatorCheck = Object.keys(values).reduce(
-        (acc: T, key: string) => {
+        (acc: any, key: string) => {
             const errors = specs[key]
                 .map(validate(values, key))
                 .filter(obj =>

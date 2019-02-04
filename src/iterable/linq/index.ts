@@ -80,3 +80,5 @@ export function Linq<T>(array: T[]) {
     };
     return Object.freeze(linqs);
 }
+
+export default Linq;

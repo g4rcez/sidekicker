@@ -21,20 +21,10 @@
         "removeComments": true,
         "resolveJsonModule": true,
         "rootDir": "./src",
-        "sourceMap": true,
+        "sourceMap": false,
         "target": "es2015",
         "typeRoots": ["./src/@types"],
-        "paths": {
-            "*": ["./src/@types/*"],
-            "@str": ["./src/strings/index"],
-            "@str/*": ["./src/strings/*"],
-            "@itr": ["./src/iterable/index"],
-            "@itr/*": ["./src/iterable/*"],
-            "@cmp": ["./src/comparable/index"],
-            "@cmp/*": ["./src/comparable/*"],
-            "@regex": ["./src/regex/index"],
-            "@regex/*": ["./src/regex/*"]
-        }
+        "paths": { "*": ["./src/@types/*"] }
     },
     "typeAcquisition": { "enable": true },
     "include": ["src/**/*"],

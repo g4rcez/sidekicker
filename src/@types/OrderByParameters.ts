@@ -1,4 +1,4 @@
 export type OrdersRules = {
-    caseSensitive?: Boolean;
-    reverseOrder?: Boolean;
+	caseSensitive?: Boolean;
+	reverseOrder?: Boolean;
 };

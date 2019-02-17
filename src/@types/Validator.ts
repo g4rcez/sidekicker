@@ -1,16 +1,16 @@
 export type ValidatorTuple = [string, Function];
 export type ValidatorRules = {
-    [key: string]: ValidatorTuple[];
+	[key: string]: ValidatorTuple[];
 };
 export type ValidatorCheck = {
-    [key: string]: ValidateObject[];
+	[key: string]: ValidateObject[];
 };
 export type ValidateObject = {
-    message: string;
-    valid: boolean;
+	message: string;
+	valid: boolean;
 };
 export type ValidatorOptions = {
-    flatMessages?: boolean;
-    showSuccess?: boolean;
-    flatMessagesWithErrors?: boolean;
+	flatMessages?: boolean;
+	showSuccess?: boolean;
+	flatMessagesWithErrors?: boolean;
 };

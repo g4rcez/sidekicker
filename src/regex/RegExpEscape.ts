@@ -1,5 +1,5 @@
 const regExpEscape = (regex: string) => {
-    return regex.replace(".", "\\.");
+	return regex.replace(".", "\\.");
 };
 
 export default regExpEscape;

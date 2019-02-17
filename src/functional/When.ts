@@ -1,3 +1,3 @@
 export function When(pred: Function, whenTrue: Function) {
-    return (x: any) => (pred(x) ? whenTrue(x) : x);
+	return (x: any) => (pred(x) ? whenTrue(x) : x);
 }

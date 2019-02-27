@@ -1,5 +1,10 @@
 {
     "compilerOptions": {
+        "alwaysStrict": true,
+        "emitBOM": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "emitDecoratorMetadata": true,
         "allowJs": false,
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
@@ -17,14 +22,15 @@
         "newLine": "LF",
         "noImplicitAny": true,
         "outDir": "./lib",
-        "pretty": true,
+        "pretty": false,
         "removeComments": true,
         "resolveJsonModule": true,
         "rootDir": "./src",
         "sourceMap": false,
         "target": "es2015",
         "typeRoots": ["./src/@types"],
-        "paths": { "*": ["./src/@types/*"] }
+        "paths": { "*": ["./src/@types/*"] },
+        "declarationMap": true,
     },
     "typeAcquisition": { "enable": true },
     "include": ["src/**/*"],

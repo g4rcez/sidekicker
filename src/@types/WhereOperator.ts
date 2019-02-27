@@ -1,18 +1,15 @@
-export type WhereOperator = {
-	key: string;
-	operator?:
-		| "!="
-		| "!=="
-		| "<"
-		| "<="
-		| "=="
-		| "==="
-		| ">"
-		| ">="
-		| "isAfter"
-		| "isBefore"
-		| "like"
-		| "isSameOrAfter"
-		| "isSameOrBefore";
-	value: any;
-};
+export type WhereOperator =
+	| "!="
+	| "!=="
+	| "<"
+	| "<="
+	| "=="
+	| "==="
+	| ">"
+	| ">="
+	| "isAfter"
+	| "isBefore"
+	| "like"
+	| "equals"
+	| "isSameOrAfter"
+	| "isSameOrBefore";

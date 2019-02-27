@@ -19,5 +19,5 @@ export type Linqs<T> = {
 	tail(): T;
 	uniq(): Linqs<T>;
 	uniqBy(key: string): Linqs<T>;
-	where(conditions: WhereOperator): Linqs<T>;
+	where(key: string, operator: WhereOperator, value: any): Linqs<T>;
 };

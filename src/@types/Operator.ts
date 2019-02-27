@@ -1,4 +1,5 @@
 export type Operator = {
+	readonly equals: Function;
 	readonly like: Function;
 	readonly isAfter: Function;
 	readonly isBefore: Function;

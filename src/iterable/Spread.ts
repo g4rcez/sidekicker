@@ -4,7 +4,7 @@ export default function Spread<T>(...props: T[]) {
 		return {};
 	}
 	if (length == 1) {
-		return { ...props };
+		return Object.assign({}, props);
 	}
 	let target = {};
 	for (let i = 0; i != length; i++) {

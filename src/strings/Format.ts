@@ -23,8 +23,16 @@ export function formatCardNumber(value: string) {
 		.trim();
 }
 
+export function formatPhoneCountryCode(phone: string) {
+	return onlyNumbers(phone).replace(/(\d\d)(\d{2})(\d{5})(\d{4})/, "+$1 $2 $3-$4");
+}
+
 export function formatPhoneDDD(phone: string) {
 	return onlyNumbers(phone).replace(/(\d\d)(9\d{4})(\d{4})/, "($1) $2-$3");
+}
+
+export function formatCurrency(value: number, intl = "pt-BR", currency = "BRL") {
+	return new Intl.NumberFormat(intl, { style: "currency", currency }).format(value).replace(/\$/, "$ ");
 }
 
 export function formatPhone(phone: string) {
@@ -32,16 +40,19 @@ export function formatPhone(phone: string) {
 	if (string.length === 8) {
 		return string.replace(/(\d{4})(\d{4})/, "$1-$2");
 	} else if (string.length === 9) {
-		return string.replace(/(9\d{4})(\d{4})/, "$1-$2");
+		return string.replace(/(\d{5})(\d{4})/, "$1-$2");
 	}
 	return formatPhoneDDD(string);
 }
 
 export const format = {
-	formatCardNumber,
-	formatCep,
 	formatCpf,
-	formatDecimals,
+	formatCep,
+	formatCnpj,
 	formatPhone,
+	formatCurrency,
+	formatDecimals,
 	formatPhoneDDD,
+	formatCardNumber,
+	formatPhoneCountryCode,
 };

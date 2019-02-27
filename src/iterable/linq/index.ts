@@ -1,6 +1,6 @@
-import { Linqs } from "Linqs";
-import { OrdersRules } from "OrderByParameters";
-import { WhereOperator } from "WhereOperator";
+import { Linqs } from "../../@types/Linqs";
+import { OrdersRules } from "../../@types/OrderByParameters";
+import { WhereOperator } from "../../@types/WhereOperator";
 import concat from "./concat";
 import GroupBy from "./GroupBy";
 import Map from "./map";
@@ -15,7 +15,7 @@ const sum = (key: string, array: any) =>
 		return (acc += el[key]);
 	}, 0);
 
-export function Linq<T>(array: T[]) {
+export function Linq<T>(array: T[]): Linqs<T> {
 	const functions: Function[] = [];
 	const linqs: Linqs<T> = {
 		average(key: string) {
@@ -52,7 +52,7 @@ export function Linq<T>(array: T[]) {
 			functions.push(OrderBy(key, rules));
 			return linqs;
 		},
-		paginate: (range: number, page: number = 0) => {
+		paginate: (range: number, page = 0) => {
 			functions.push(Paginate(range, page));
 			return linqs;
 		},
@@ -73,12 +73,12 @@ export function Linq<T>(array: T[]) {
 			functions.push(uniqBy(key));
 			return linqs;
 		},
-		where: (conditions: WhereOperator): Linqs<T> => {
-			functions.push(Where(conditions));
+		where: (key: string, operator: WhereOperator, value: any): Linqs<T> => {
+			functions.push(Where({ key, operator, value }));
 			return linqs;
 		},
 	};
-	return Object.freeze(linqs);
+	return linqs;
 }
 
 export default Linq;

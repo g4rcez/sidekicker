@@ -46,7 +46,7 @@ export function readableString(string: string) {
 		.replace(/_/g, " ");
 }
 
-export function truncate(text: string, length: number, trunc: string, addTrunc: boolean = false) {
+export function truncate(text: string, length: number, trunc: string, addTrunc = false) {
 	const stringMaxLength = length - trunc.length;
 	return addTrunc ? text.substr(0, length) + trunc : text.substr(0, stringMaxLength) + trunc;
 }
@@ -63,7 +63,7 @@ export function bothPadding(text: string, total: number, pad: string) {
 	return padding(text, total, pad, "both");
 }
 
-export function padding(text: string, total: number, pad: string, side: string = "right") {
+export function padding(text: string, total: number, pad: string, side = "right") {
 	if (text.length >= total) {
 		return text;
 	}
@@ -101,7 +101,7 @@ export function capitalize([char, ...chars]: string) {
 	return char.toUpperCase() + chars.join("").toLowerCase();
 }
 
-export function titlelize(string: string, preserve: boolean = false) {
+export function titlelize(string: string, preserve = false) {
 	const words = string.split(" ");
 	const title = words.reduce((acc: string, curr: string) => {
 		const first = curr.substring(0, 1).toUpperCase();
@@ -117,14 +117,11 @@ export function replaceAll(replace: IReplace) {
 
 export function brazilize(string: string) {
 	return titlelize(string)
-		.replace(" De ", " de ")
-		.replace(" Da ", " da ")
-		.replace(" Do ", " do ")
-		.replace(" Dos ", " dos ")
-		.replace(" Das ", " das ")
-		.replace(" Um ", " um ")
-		.replace(" Uns ", " uns ")
-		.replace(" Del ", " del ");
+		.replace(/ D(a|e|i|o|u) /g, " de ")
+		.replace(/ D(a|e|i|o|u)s /g, " de ")
+		.replace(/ Um /g, " um ")
+		.replace(/ Uns /g, " uns ")
+		.replace(/ Del /g, " del ");
 }
 
 export function camelize(string: string) {
@@ -158,7 +155,7 @@ export function toInt(string: any) {
 	return string >> 0;
 }
 
-export function toFloat(string: string | number, expoent: number = 2) {
+export function toFloat(string: string | number, expoent = 2) {
 	return Number.parseFloat(Number.parseFloat(`${string}`).toExponential(expoent));
 }
 

@@ -1,5 +1,9 @@
 export function urlOnlyParameters(urlString: string) {
-	return urlString.match(/[^&?]*?=[^&?]*/g);
+	const matches = urlString.match(/[^&?]*?=[^&?]*/g);
+	if (!!matches) {
+		return matches;
+	}
+	return [];
 }
 
 export function splitUrlValues(param: string): string[] {
@@ -10,7 +14,7 @@ export function getUrlParameters(urlString: string) {
 	return urlString.split("&");
 }
 
-export function parameterKeyAndValue(parameter: string): Array<string[]> {
+export function parameterKeyAndValue(parameter: string): string[][] {
 	return getUrlParameters(parameter).map(splitUrlValues);
 }
 
@@ -27,7 +31,7 @@ export function urlParameters(urlString: string) {
 		}, {});
 }
 
-export function urlProtocol(urlString: string = "") {
+export function urlProtocol(urlString = "") {
 	return urlString.split("://")[0];
 }
 

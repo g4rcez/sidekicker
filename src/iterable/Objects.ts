@@ -1,9 +1,9 @@
+import Spread from "./Spread";
+
 export function findByKey(prop: string, object: any): any {
 	for (const x of Object.keys(object)) {
 		if (prop === x) {
-			return {
-				[x]: object[x],
-			};
+			return { [x]: object[x] };
 		}
 		if (typeof object[x] === "object" || Array.isArray(object[x])) {
 			return findByKey(prop, object[x]);
@@ -16,7 +16,7 @@ export function defaults(defaultParams: any, values: any) {
 	const newValues = { ...values };
 	Object.keys(defaultParams).forEach((some) => {
 		const val = defaultParams[some];
-		newValues[some] = !newValues[some] ? defaultParams(val, newValues[some]) : { ...newValues, [some]: val };
+		newValues[some] = !newValues[some] ? defaultParams(val, newValues[some]) : Spread(newValues, { [some]: val });
 	});
 	return newValues;
 }
@@ -35,7 +35,7 @@ export function get(from: object, ...selectors: string[]) {
 export function omit(obj: any, ...key: string[]) {
 	return Object.keys(obj).reduce((acc, el) => {
 		if (!key.includes(el)) {
-			return { ...acc, [el]: obj[el] };
+			return Spread(acc, { [el]: obj[el] });
 		}
 		return acc;
 	}, {});

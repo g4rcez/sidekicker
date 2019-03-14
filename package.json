@@ -1,6 +1,6 @@
 {
     "name": "sidekicker",
-    "version": "0.0.13",
+    "version": "0.0.15",
     "description": "An abstract lib to help in our JS/TS projects",
     "main": "lib/index.js",
     "scripts": {
@@ -20,16 +20,15 @@
     },
     "license": "MIT",
     "dependencies": {
-        "@types/ramda": "^0.25.46",
+        "@types/ramda": "^0.26.3",
         "axios": "^0.18.0",
-        "moment": "^2.22.2",
-        "query-string": "^6.2.0",
-        "ramda": "^0.25.0"
+        "moment": "^2.24.0",
+        "ramda": "^0.26.1"
     },
     "devDependencies": {
-        "@types/bluebird": "^3.5.24",
-        "@types/jest": "^23.3.10",
-        "@types/node": "^10.12.21",
+        "@types/bluebird": "^3.5.26",
+        "@types/jest": "^24.0.11",
+        "@types/node": "^11.11.1",
         "babel-core": "^6.26.3",
         "babel-jest": "^24.1.0",
         "concurrently": "^4.0.1",

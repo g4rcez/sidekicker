@@ -26,10 +26,12 @@ const adjacent = (any: any, direction: number) => {
 const addChars = (total: number, pad: string) => {
 	let concat = "";
 	while (concat.length < total) {
-		[...pad].forEach((x) => (concat += x));
+		spreadString(pad).forEach((x) => (concat += x));
 	}
 	return concat;
 };
+
+export const spreadString = (text: string) => text.split("");
 
 export function previousChar(string: string) {
 	return adjacent(string, -1);
@@ -97,8 +99,14 @@ export function reverse(string: string) {
 	string.split("").reduce((r: string, c: string) => `${c}${r}`, "");
 }
 
-export function capitalize([char, ...chars]: string) {
-	return char.toUpperCase() + chars.join("").toLowerCase();
+export function capitalize(chars: string) {
+	return (
+		chars.charAt(0).toUpperCase() +
+		spreadString(chars)
+			.splice(1)
+			.join("")
+			.toLowerCase()
+	);
 }
 
 export function titlelize(string: string, preserve = false) {

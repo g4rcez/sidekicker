@@ -19,16 +19,20 @@ export function parameterKeyAndValue(parameter: string): string[][] {
 }
 
 export function urlParameters(urlString: string) {
-	return urlOnlyParameters(urlString)
-		.map((parameter) => new Set(parameterKeyAndValue(parameter)))
-		.reduce((acc, el) => {
-			const [name, value] = el.values().next().value;
-			try {
-				return { ...acc, [name]: JSON.parse(value) };
-			} catch (error) {
-				return { ...acc, [name]: value };
-			}
-		}, {});
+	const arr = urlOnlyParameters(urlString);
+	if (Array.isArray(arr)) {
+		return arr
+			.map((parameter) => new Set(parameterKeyAndValue(parameter)))
+			.reduce((acc, el) => {
+				const [name, value] = el.values().next().value;
+				try {
+					return { ...acc, [name]: JSON.parse(value) };
+				} catch (error) {
+					return { ...acc, [name]: value };
+				}
+			}, {});
+	}
+	return {};
 }
 
 export function urlProtocol(urlString = "") {

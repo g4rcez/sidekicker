@@ -1,5 +1,9 @@
+export function spreadSet<T>(set: Set<T>) {
+	return Array.from(set);
+}
+
 export function unique(array: any[]) {
-	return [...new Set(array)];
+	return spreadSet(new Set(array));
 }
 
 export function flat(arr: any[]): any[] {
@@ -34,7 +38,7 @@ export function intersecArray(arr1: any[], arr2: any[]) {
 }
 
 export function concat(...arrays: any[]) {
-	return [...new Set(flat(arrays))];
+	return spreadSet(new Set(flat(arrays)));
 }
 
 export function arrToObj(arr: any[]) {

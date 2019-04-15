@@ -1,15 +1,15 @@
-import Alphabetical from "../../sort/Alphabetical";
-import orderNumber from "../../sort/Number";
+import Alphabetical from "../sort/Alphabetical";
+import orderNumber from "../sort/Number";
 import { OrdersRules } from "OrderByParameters";
 
-interface ITypeCoersion {
+interface ITypeCoercion {
 	number: Function;
 	arrays: Function;
 	[key: string]: Function;
 }
 
-const typeCoersion: ITypeCoersion = {
-	arrays: (rules: OrdersRules) => (x: Array<any>, y: Array<any>) => {
+const typeCoercion: ITypeCoercion = {
+	arrays: (rules: OrdersRules) => (x: any[], y: any[]) => {
 		if (rules && rules.reverseOrder) {
 			return x.length < y.length;
 		}
@@ -29,7 +29,7 @@ const orderBy = (key: string, rules?: OrdersRules) => (array: any[]) => {
 		return [];
 	}
 	const type = typeof array[0][key];
-	const organizer = typeCoersion[type](rules);
+	const organizer = typeCoercion[type](rules);
 	const newArray = [...array].sort((a, b) => organizer(a[key], b[key]));
 	if (rules && rules.reverseOrder) {
 		return newArray.reverse();

@@ -1,17 +1,27 @@
 {
     "defaultSeverity": "error",
     "linterOptions": {
-        "exclude": ["*.js", "*.d.ts", "tslint/", "src/serviceWorker.ts"]
+        "exclude": [
+            "*.js",
+            "*.d.ts",
+            "tslint/",
+            "src/serviceWorker.ts"
+        ]
     },
     "rules": {
         "align": {
-            "options": ["parameters", "statements"],
+            "options": [
+                "parameters",
+                "statements"
+            ],
             "severity": "warn"
         },
         "arrow-return-shorthand": true,
         "curly": true,
         "max-line-length": {
-            "options": [120],
+            "options": [
+                120
+            ],
             "severity": "warn"
         },
         "new-parens": true,
@@ -26,16 +36,17 @@
             "severity": "warn"
         },
         "triple-equals": {
-            "options": ["allow-null-check"]
+            "options": [
+                "allow-null-check"
+            ]
         },
-        "trailing-comma": {
-            "options": {
-                "multiline": "always",
-                "singleline": "never"
-            }
-        },
+        "trailing-comma": false,
         "variable-name": {
-            "options": ["ban-keywords", "allow-pascal-case", "check-format"]
+            "options": [
+                "ban-keywords",
+                "allow-pascal-case",
+                "check-format"
+            ]
         },
         "class-name": true,
         "array-type": {
@@ -54,7 +65,10 @@
         "encoding": true,
         "switch-default": true,
         "semicolon": {
-            "options":["always", "ignore-bound-class-methods"],
+            "options": [
+                "always",
+                "ignore-bound-class-methods"
+            ],
             "severity": "warning"
         },
         "radix": true,

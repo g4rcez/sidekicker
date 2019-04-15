@@ -1,6 +1,6 @@
-import { Linqs } from "../../@types/Linqs";
-import { OrdersRules } from "../../@types/OrderByParameters";
-import { WhereOperator } from "../../@types/WhereOperator";
+import { Linqs } from "../@types/Linqs";
+import { OrdersRules } from "../@types/OrderByParameters";
+import { WhereOperator } from "../@types/WhereOperator";
 import concat from "./concat";
 import GroupBy from "./GroupBy";
 import Map from "./map";

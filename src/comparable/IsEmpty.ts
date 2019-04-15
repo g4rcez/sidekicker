@@ -1,4 +1,4 @@
-export function isEmpty(object: any) {
+export function isEmpty(object: unknown | any) {
 	if (typeof object === "undefined") {
 		return true;
 	}

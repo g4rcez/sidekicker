@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "alwaysStrict": true,
-        "emitBOM": true,
+        "emitBOM": false,
         "inlineSourceMap": false,
         "inlineSources": false,
         "emitDecoratorMetadata": false,
@@ -16,23 +16,42 @@
         "forceConsistentCasingInFileNames": true,
         "importHelpers": true,
         "jsx": "preserve",
-        "lib": ["es6", "es2018", "es7", "dom", "esnext","esnext.intl"],
+        "lib": [
+            "es6",
+            "es2018",
+            "es7",
+            "dom",
+            "esnext",
+        ],
         "module": "commonjs",
         "moduleResolution": "node",
-        "newLine": "LF",
         "noImplicitAny": true,
         "outDir": "./lib",
         "pretty": true,
         "removeComments": true,
         "resolveJsonModule": true,
         "rootDir": "./src",
+        "skipDefaultLibCheck": true,
         "sourceMap": false,
         "target": "es5",
-        "typeRoots": ["./src/@types"],
-        "paths": { "*": ["./src/@types/*"] },
+        "typeRoots": [
+            "./src/@types"
+        ],
+        "paths": {
+            "*": [
+                "./src/@types/*"
+            ]
+        },
         "declarationMap": false,
     },
-    "typeAcquisition": { "enable": true },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", ".git"]
+    "typeAcquisition": {
+        "enable": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        ".git"
+    ]
 }

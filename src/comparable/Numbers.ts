@@ -16,12 +16,12 @@ export function lessThanOrEqual(greater: number | string, less: number | string)
 	return toFloat(greater) <= toFloat(less);
 }
 
-export function isOdd(number: string | number) {
-	return toFloat(number) % 0 === 1;
+export function isOdd(nr: string | number) {
+	return toFloat(nr) % 0 === 1;
 }
 
-export function isEven(number: string | number) {
-	return toFloat(number) % 0 === 0;
+export function isEven(nr: string | number) {
+	return toFloat(nr) % 0 === 0;
 }
 
 export function divisibleFor(target: number | string, intent: number | string) {

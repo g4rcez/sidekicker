@@ -1,5 +1,5 @@
 import { Operator } from "Operator";
-import { isAfter, isBefore, isSameOrAfter, isSameOrBefore } from "../../dates/Date";
+import { isAfter, isBefore, isSameOrAfter, isSameOrBefore } from "../dates/Date";
 
 export const operators: Operator = {
 	// tslint:disable-next-line:triple-equals

@@ -1,22 +1,24 @@
-interface ISeparator {
+export interface ISeparator {
 	text: string;
 	separator: string;
 }
 
-interface IMask {
+export interface IMask {
 	text: string;
 	pad: number;
 	maskStr?: string;
 }
 
-interface IReplace {
+export interface IReplace {
 	text: string;
 	expr: string;
 	new: string;
 }
 
-const adjacent = (any: any, direction: number) => {
-	const str: string = any.toString();
+export const spreadString = (text: string) => text.split("");
+
+const adjacent = (text: any, direction: number) => {
+	const str: string = text.toString();
 	if (str.length === 0) {
 		return "";
 	}
@@ -31,18 +33,16 @@ const addChars = (total: number, pad: string) => {
 	return concat;
 };
 
-export const spreadString = (text: string) => text.split("");
-
-export function previousChar(string: string) {
-	return adjacent(string, -1);
+export function previousChar(str: string) {
+	return adjacent(str, -1);
 }
 
-export function nextChar(string: string) {
-	return adjacent(string, 1);
+export function nextChar(str: string) {
+	return adjacent(str, 1);
 }
 
-export function readableString(string: string) {
-	return trueTrim(string)
+export function readableString(str: string) {
+	return trueTrim(str)
 		.replace(/([a-z\d])([A-Z]+)/g, "$1_$2")
 		.replace(/[-\s]+/g, "_")
 		.replace(/_/g, " ");
@@ -95,8 +95,8 @@ export function mask({ text, pad = text.length / 4, maskStr = "*" }: IMask) {
 	return `${text}`.slice(-pad).padStart(`${text}`.length, maskStr);
 }
 
-export function reverse(string: string) {
-	string.split("").reduce((r: string, c: string) => `${c}${r}`, "");
+export function reverse(str: string) {
+	str.split("").reduce((r: string, c: string) => `${c}${r}`, "");
 }
 
 export function capitalize(chars: string) {
@@ -109,8 +109,8 @@ export function capitalize(chars: string) {
 	);
 }
 
-export function titlelize(string: string, preserve = false) {
-	const words = string.split(" ");
+export function titlelize(str: string, preserve = false) {
+	const words = str.split(" ");
 	const title = words.reduce((acc: string, curr: string) => {
 		const first = curr.substring(0, 1).toUpperCase();
 		const second = curr.substring(1);
@@ -123,8 +123,8 @@ export function replaceAll(replace: IReplace) {
 	return replace.text.replace(new RegExp(replace.expr, "g"), replace.new);
 }
 
-export function brazilize(string: string) {
-	return titlelize(string)
+export function brazilize(str: string) {
+	return titlelize(str)
 		.replace(/ D(a|e|i|o|u) /g, " de ")
 		.replace(/ D(a|e|i|o|u)s /g, " de ")
 		.replace(/ Um /g, " um ")
@@ -132,8 +132,8 @@ export function brazilize(string: string) {
 		.replace(/ Del /g, " del ");
 }
 
-export function camelize(string: string) {
-	const s = string
+export function camelize(str: string) {
+	const s = str
 		.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
 		.map((x) => x.slice(0, 1).toUpperCase() + x.slice(1).toLowerCase())
 		.join("");
@@ -155,24 +155,24 @@ export function slugify(text: string) {
 	return convert({ separator: "-", text });
 }
 
-export function trueTrim(string: string) {
-	return string.trim().replace(/\s\s+/g, " ");
+export function trueTrim(str: string) {
+	return str.trim().replace(/\s\s+/g, " ");
 }
 
-export function toInt(string: any) {
-	return string >> 0;
+export function toInt(str: any) {
+	return str >> 0;
 }
 
-export function toFloat(string: string | number, expoent = 2) {
-	return Number.parseFloat(Number.parseFloat(`${string}`).toExponential(expoent));
+export function toFloat(str: string | number, exponent = 2) {
+	return Number.parseFloat(Number.parseFloat(`${str}`).toExponential(exponent));
 }
 
-export function onlyNumbers(string: string) {
-	return string.replace(/[^\d]/g, "");
+export function onlyNumbers(str: string) {
+	return str.replace(/[^\d]/g, "");
 }
 
-export function onlyChars(string: string) {
-	return string.replace(/[^a-záàãéèẽíìĩóòõúùũâêîôû]+/gi, "");
+export function onlyChars(str: string) {
+	return str.replace(/[^a-záàãéèẽíìĩóòõúùũâêîôû]+/gi, "");
 }
 
 export const utils = {

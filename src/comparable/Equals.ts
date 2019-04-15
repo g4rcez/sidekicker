@@ -1,12 +1,13 @@
 const props = Object.prototype.hasOwnProperty;
 
-const isObject = (a: any, b: any) => a && b && typeof a === "object" && typeof b === "object";
+const isObject = (a: unknown, b: unknown) => a && b && typeof a === "object" && typeof b === "object";
 
-const createInstanceOf = (a: any, b: any, instance: any) => {
+const createInstanceOf = (a: unknown, b: unknown, instance: any) => {
 	return [a instanceof instance, b instanceof instance];
 };
 
-export function deepEquals(value: any, target: any) {
+// tslint:disable-next-line: cyclomatic-complexity
+export function Equals(value: any, target: any) {
 	if (value === target) {
 		return true;
 	}
@@ -22,7 +23,7 @@ export function deepEquals(value: any, target: any) {
 			return false;
 		}
 		for (let i = length; i-- !== 0; ) {
-			if (!deepEquals(value[i], target[i])) {
+			if (!Equals(value[i], target[i])) {
 				return false;
 			}
 		}
@@ -56,7 +57,7 @@ export function deepEquals(value: any, target: any) {
 		}
 	}
 	for (let i = length; i-- !== 0; ) {
-		if (!deepEquals(value[objectKeys[i]], target[objectKeys[i]])) {
+		if (!Equals(value[objectKeys[i]], target[objectKeys[i]])) {
 			return false;
 		}
 	}

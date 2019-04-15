@@ -1,12 +1,12 @@
-export function strEquals(string: string, compare: string) {
-	return string === compare;
+export function strEquals(str: string, compare: string) {
+	return str === compare;
 }
 
-export function equalsCaseInsensitive(string: string, compare: string) {
-	return string.toLowerCase() === compare.toLowerCase();
+export function equalsCaseInsensitive(str: string, compare: string) {
+	return str.toLowerCase() === compare.toLowerCase();
 }
 
-export function firstAlphabeticalOrder(first: string, second: string, caseSensitive: boolean = true) {
+export function firstAlphabeticalOrder(first: string, second: string, caseSensitive = true) {
 	if (caseSensitive) {
 		return first < second;
 	}

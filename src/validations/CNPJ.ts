@@ -1,6 +1,6 @@
 import { onlyNumbers } from "../strings/Utils";
 
-const getChar = (str: string, position: number) => Number.parseInt(str.charAt(position));
+const getChar = (str: string, position: number) => Number.parseInt(str.charAt(position), 10);
 
 export function isCnpj(cnpj: string) {
 	const val = onlyNumbers(cnpj);
@@ -19,7 +19,7 @@ export function isCnpj(cnpj: string) {
 		}
 	}
 	let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-	if (resultado != getChar(digits, 0)) {
+	if (resultado !== getChar(digits, 0)) {
 		return false;
 	}
 	length = length + 1;

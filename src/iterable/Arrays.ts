@@ -1,5 +1,5 @@
 export function spreadSet<T>(set: Set<T>) {
-	return Array.from(set);
+	return <T[]>Array.from(set);
 }
 
 export function unique(array: any[]) {

@@ -1,6 +1,6 @@
-import { Format } from "../lib";
+import OK from "../lib/strings";
 
-console.log(Format.formatCpf("11663283761"));
+console.log(formatCpf("11663283761"));
 console.log(Format.formatCnpj("11111111111111"));
 console.log(Format.formatCep("36021070"));
 console.log(Format.formatPhone("32984047599"));

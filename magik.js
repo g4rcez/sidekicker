@@ -51,7 +51,7 @@ read("./package.json")
 					await shell(`git commit -m "${message || version}"`);
 					console.log("Increment to version: ", version);
 					const tag = await shell(`git tag v${version}`);
-					console.log(`"Create tag: v${version}`, tag);
+					console.log(`"Create tag: v${version}`, tag[1]);
 				} catch (error) {
 					console.log(error);
 				}

@@ -12,7 +12,7 @@ import Where from "./Where";
 
 const sum = (key: string, array: any) =>
 	array.reduce((acc: number, el: any) => {
-		return (acc += el[key]);
+		return acc + Number.parseFloat(`${el[key]}`);
 	}, 0);
 
 export function Linq<T>(array: T[]): Linqs<T> {

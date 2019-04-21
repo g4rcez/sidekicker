@@ -1,5 +1,5 @@
 import { Operator } from "Operator";
-import { isAfter, isBefore, isSameOrAfter, isSameOrBefore } from "../dates/Date";
+import { isAfter, isBefore, isSameOrAfter, isSameOrBefore, between } from "../dates/Date";
 import { Equals } from "../comparable";
 
 export const operators: Operator = {
@@ -20,6 +20,10 @@ export const operators: Operator = {
 	isSameOrBefore,
 	like: (x: string, y: string) => {
 		return !!x.match(new RegExp(`.*${y}.*`, "gi"));
+	},
+	between: (value: string, values: any[]) => {
+		const [mask, init, end] = values;
+		return between(mask, init, end, value);
 	},
 };
 

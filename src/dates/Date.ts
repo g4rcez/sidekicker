@@ -1,4 +1,4 @@
-import moment, { MomentSetObject } from "moment";
+import moment, { MomentSetObject, Moment } from "moment";
 
 export const isAfter = (value: MomentSetObject, target: MomentSetObject) => moment(value).isAfter(moment(target));
 
@@ -33,4 +33,17 @@ export function sameMouth(date: string) {
 
 export function sameYear(date: string) {
 	return moment(date).isSame(moment(), "year");
+}
+
+export type Mostring = string | Moment;
+
+const checkMoment = (value: Mostring, mask = "Z") => {
+	if (moment.isMoment(value)) {
+		return value;
+	}
+	return moment(value, mask);
+};
+
+export function between(mask: string, init: Mostring, end: Mostring, value: Mostring) {
+	return checkMoment(value, mask).isBetween(checkMoment(init, mask), checkMoment(end, mask));
 }

@@ -1,4 +1,4 @@
-import { isUrl } from "../src/validations";
+import { isUrl } from "../../src/validations";
 
 [
     "https://translate.google.com/?hl=pt-BR#view=home&op=translate&sl=auto&tl=pt&text=too",

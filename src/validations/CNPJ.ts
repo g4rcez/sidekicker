@@ -4,7 +4,7 @@ const getChar = (str: string, position: number) => Number.parseInt(str.charAt(po
 
 export function isCnpj(cnpj: string) {
 	const val = onlyNumbers(cnpj);
-	if (/0{14}/.test(val) || val.length != 14) {
+	if (/0{14}/.test(val) || val.length !== 14) {
 		return false;
 	}
 	let length = val.length - 2;
@@ -33,5 +33,5 @@ export function isCnpj(cnpj: string) {
 		}
 	}
 	resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-	return resultado == getChar(digits, 1);
+	return resultado === getChar(digits, 1);
 }

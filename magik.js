@@ -1,6 +1,5 @@
 const fs = require("fs");
-const argv = process.argv.splice(1);
-
+const argv = process.argv.splice(2);
 const { exec } = require("child_process");
 
 const shell = (command) =>
@@ -24,7 +23,6 @@ const write = (file, content) =>
 	);
 
 const message = argv[0];
-console.log("ARGS", argv);
 const versionInc = argv[1] || "beta";
 
 const calculateVersion = (increment, versions = ["0", "0", "0"]) => {

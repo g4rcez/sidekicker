@@ -11,16 +11,16 @@ interface IEmailFunctions {
 }
 
 const functions: IEmailFunctions = {
-	domain: (string: string, domain: string) => new RegExp(`@${domain}$`).test(string),
-	namePattern: (string: string, pattern: string) => new RegExp(regExpEscape(`^${pattern}@`)).test(string),
-	notIncludeChars: (string: string, rules: string) => {
+	domain: (str: string, domain: string) => new RegExp(`@${domain}$`).test(str),
+	namePattern: (str: string, pattern: string) => new RegExp(regExpEscape(`^${pattern}@`)).test(str),
+	notIncludeChars: (str: string, rules: string) => {
 		const notInclude = [...rules] || [];
-		const errors = notInclude.filter((x) => string.search(x) === -1).filter(Boolean);
+		const errors = notInclude.filter((x) => str.search(x) === -1).filter(Boolean);
 		return notInclude.length === errors.length;
 	},
 };
 
-export function isEmail(string: string, rules?: EmailValidation) {
-	const test = !!email.test(string);
-	return test && generic(rules, string, functions);
+export function isEmail(str: string, rules?: EmailValidation) {
+	const test = !!email.test(str);
+	return test && generic(rules, str, functions);
 }

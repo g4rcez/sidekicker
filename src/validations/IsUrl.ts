@@ -14,9 +14,7 @@ function concatProtocols(some: string[]) {
 }
 
 const domainRegex = new RegExp(
-	// Start domain block
 	"(?:" +
-		// Accept IP address and private & local networks
 		// IP address dotted notation octets
 		// excludes loopback network 0.0.0.0
 		// excludes reserved space >= 224.0.0.0
@@ -45,6 +43,7 @@ const domainRegex = new RegExp(
 
 function getUrlRegex(protocols: string) {
 	return new RegExp(
+		// tslint:disable-next-line: prefer-template
 		"^" +
 			// protocol identifier (optional)
 			// short syntax // still required

@@ -68,10 +68,10 @@ const ninthDigit = (cpf: string) => onlyNumbers(cpf)[8];
 
 export function isCpf(cpf: string, rules?: CpfValidator) {
 	const functions: ICpfFunctions = {
-		digit: (string: string, digit: number) => equals(ninthDigit(string), digit),
-		mask: (string: string) => !!REGEX_CPF.test(string),
-		states: (string: string, states: string[]) => {
-			const ninth = toInt(ninthDigit(string));
+		digit: (str: string, digit: number) => equals(ninthDigit(str), digit),
+		mask: (str: string) => !!REGEX_CPF.test(str),
+		states: (str: string, states: string[]) => {
+			const ninth = toInt(ninthDigit(str));
 			const array: string[] = ufPerNinthDigit[ninth];
 			for (const state of states) {
 				if (array.includes(state)) {

@@ -5,6 +5,7 @@ export type Operator = {
 	readonly isBefore: Function;
 	readonly isSameOrBefore: Function;
 	readonly isSameOrAfter: Function;
+	readonly between: Function;
 	readonly "==": Function;
 	readonly "!=": Function;
 	readonly "!==": Function;

@@ -16,7 +16,12 @@ export function Equals(value: any, target: any) {
 	}
 	const targetArr = Array.isArray(value);
 	const valueArr = Array.isArray(target);
-	let length;
+	if (targetArr !== valueArr) {
+		return false;
+	}
+
+	let length = 0;
+
 	if (targetArr && valueArr) {
 		length = value.length;
 		if (length !== target.length) {
@@ -29,16 +34,16 @@ export function Equals(value: any, target: any) {
 		}
 		return true;
 	}
-	if (targetArr !== valueArr) {
-		return false;
-	}
 	const [valueDate, targetDate] = createInstanceOf(value, target, Date);
+
 	if (valueDate !== targetDate) {
 		return false;
 	}
+
 	if (valueDate && targetDate) {
 		return value.getTime() === target.getTime();
 	}
+
 	const [regexValue, regexTarget] = createInstanceOf(value, target, RegExp);
 	if (regexValue !== regexTarget) {
 		return false;
@@ -46,11 +51,13 @@ export function Equals(value: any, target: any) {
 	if (regexValue && regexTarget) {
 		return value.toString() === target.toString();
 	}
+
 	const objectKeys = Object.keys(value);
 	length = objectKeys.length;
 	if (length !== Object.keys(target).length) {
 		return false;
 	}
+
 	for (let i = length; i-- !== 0; ) {
 		if (!props.call(target, objectKeys[i])) {
 			return false;

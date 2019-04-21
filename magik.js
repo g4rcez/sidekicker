@@ -1,5 +1,6 @@
 const fs = require("fs");
-const argv = process.argv.splice(0, 1);
+const argv = process.argv.splice(1);
+
 const { exec } = require("child_process");
 
 const shell = (command) =>

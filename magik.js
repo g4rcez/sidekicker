@@ -23,6 +23,7 @@ const write = (file, content) =>
 	);
 
 const message = argv[0];
+console.log("ARGS", argv);
 const versionInc = argv[1] || "beta";
 
 const calculateVersion = (increment, versions = ["0", "0", "0"]) => {
@@ -45,7 +46,7 @@ const gitAdd = async () => {
 
 const gitCommit = async (version) => {
 	await shell(`git commit -m "${message || version}"`);
-	console.log("Increment to version: ", version);
+	console.log("Increment to version: ", version, message);
 };
 
 const gitTag = async (version) => {

@@ -21,5 +21,5 @@ export default function Pluralize(text: string, length: lenA, plurals: Plurals, 
 			strBuilder = strBuilder.replace(new RegExp(`#{${x}}`, "g"), x);
 		}
 	});
-	return strBuilder;
+	return strBuilder.replace(/\#\{\%\}/, `${len}`);
 }

@@ -30,7 +30,6 @@
         "pretty": true,
         "removeComments": true,
         "resolveJsonModule": true,
-        "rootDir": "./src",
         "skipDefaultLibCheck": true,
         "sourceMap": false,
         "target": "es5",
@@ -48,7 +47,8 @@
         "enable": true
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "tests/**/*"
     ],
     "exclude": [
         "node_modules",

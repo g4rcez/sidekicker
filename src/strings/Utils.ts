@@ -125,8 +125,8 @@ export function replaceAll(replace: IReplace) {
 
 export function brazilize(str: string) {
 	return titlelize(str)
-		.replace(/ D(a|e|i|o|u) /g, " de ")
-		.replace(/ D(a|e|i|o|u)s /g, " de ")
+		.replace(/ D(a|e|i|o|u) /g, " $1 ".toLowerCase())
+		.replace(/ D(a|e|i|o|u)s /g, " de ".toLowerCase())
 		.replace(/ Um /g, " um ")
 		.replace(/ Uns /g, " uns ")
 		.replace(/ Del /g, " del ");

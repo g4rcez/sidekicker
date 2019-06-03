@@ -14,13 +14,11 @@ export function formatCnpj(cnpj: string) {
 }
 
 export function formatDecimals(target: string | number, places: number) {
-	return parseFloat(target.toString()).toFixed(places);
+	return parseFloat(`${target}`).toFixed(places);
 }
 
-export function formatCardNumber(card: string) {
-	return onlyNumbers(card)
-		.replace(/(\d{4})/g, "$1 ")
-		.trim();
+export function formatCardNumber(str?: string) {
+	return !!str ? str.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, "$1 $2 $3 $4").trim() : "";
 }
 
 export function formatPhoneCountryCode(phone: string) {
@@ -35,6 +33,10 @@ export function formatCurrency(value: number, intl = "pt-BR", currency = "BRL") 
 	return new Intl.NumberFormat(intl, { style: "currency", currency }).format(value).replace(/\$/, "$ ");
 }
 
+export function formatCellPhone(str?: string) {
+	return str ? str.replace(/(\d\d)(\d{5})(\d{4})/, "($1) $2-$3") : "";
+}
+
 export function formatPhone(phone: string) {
 	const str = onlyNumbers(phone);
 	if (str.length === 8) {
@@ -45,6 +47,14 @@ export function formatPhone(phone: string) {
 	return formatPhoneDDD(str);
 }
 
+export const formatBrlToFloat = (currency: string) => {
+	const final = currency
+		.replace(/\./g, "")
+		.replace(/,/g, ".")
+		.replace(/[^0-9\.]/g, "");
+	return Number.parseFloat(final);
+};
+
 export const format = {
 	formatCpf,
 	formatCep,
@@ -53,6 +63,8 @@ export const format = {
 	formatCurrency,
 	formatDecimals,
 	formatPhoneDDD,
+	formatCellPhone,
 	formatCardNumber,
+	formatBrlToFloat,
 	formatPhoneCountryCode,
 };

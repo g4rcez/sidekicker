@@ -35,15 +35,55 @@ export function sameYear(date: string) {
 	return moment(date).isSame(moment(), "year");
 }
 
-export type Mostring = string | Moment;
+export type MoString = string | Moment;
 
-const checkMoment = (value: Mostring, mask = "Z") => {
+const checkMoment = (value: MoString, mask = "Z") => {
 	if (moment.isMoment(value)) {
 		return value;
 	}
 	return moment(value, mask);
 };
 
-export function between(mask: string, init: Mostring, end: Mostring, value: Mostring) {
+export function between(mask: string, init: MoString, end: MoString, value: MoString) {
 	return checkMoment(value, mask).isBetween(checkMoment(init, mask), checkMoment(end, mask));
 }
+
+const dateHourMask = "DD/MM/YYYY HH:mm";
+const dateMask = "DD/MM/YYYY";
+const hourMask = "HH:mm";
+const defaultMask = "ZZ";
+
+export function toDate(date?: string, format = defaultMask, showToday = false) {
+	if (date) {
+		return moment(date, format).format(dateMask);
+	}
+	if (showToday) {
+		return moment().format(dateMask);
+	}
+	return "";
+}
+
+export function dateHour(date?: string, format = defaultMask, showToday = false) {
+	if (date) {
+		return moment(date, format).format(dateHourMask);
+	}
+	if (showToday) {
+		return moment().format(dateMask);
+	}
+	return moment().format(dateHourMask);
+}
+
+export function toHour(date: string, format = defaultMask, showToday = false) {
+	if (date) {
+		return moment(date, format).format(hourMask);
+	}
+	if (showToday) {
+		return moment().format(dateMask);
+	}
+	return moment().format(hourMask);
+}
+
+export const safeDateConvert = (date: string, mask = defaultMask, errorMsg = "Não definido") => {
+	const safe = moment(date);
+	return safe.isValid() ? safe.format(mask) : errorMsg;
+};

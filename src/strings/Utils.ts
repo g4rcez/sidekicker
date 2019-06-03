@@ -88,7 +88,7 @@ export function padding(text: string, total: number, pad: string, side = "right"
 		}
 		return padded;
 	}
-	return text + addChars(padLength, pad);
+	return `${text}${addChars(padLength, pad)}`;
 }
 
 export function mask({ text, pad = text.length / 4, maskStr = "*" }: IMask) {

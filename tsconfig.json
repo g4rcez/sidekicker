@@ -14,7 +14,7 @@
         "esModuleInterop": true,
         "experimentalDecorators": false,
         "forceConsistentCasingInFileNames": true,
-        "importHelpers": true,
+        "importHelpers": false,
         "jsx": "preserve",
         "lib": [
             "es6",

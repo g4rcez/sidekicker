@@ -1,6 +1,6 @@
 {
     "name": "sidekicker",
-    "version": "0.0.20",
+    "version": "0.0.21",
     "description": "An abstract lib to help in our JS/TS projects",
     "main": "lib/index.js",
     "scripts": {
@@ -20,7 +20,6 @@
     },
     "license": "MIT",
     "dependencies": {
-        "@types/ramda": "^0.26.3",
         "axios": "^0.18.0",
         "moment": "^2.24.0",
         "ramda": "^0.26.1"
@@ -30,6 +29,7 @@
         "@types/jest": "^24.0.13",
         "@types/mocha": "^5.2.7",
         "@types/node": "^11.11.1",
+        "@types/ramda": "^0.26.3",
         "babel-core": "^6.26.3",
         "babel-jest": "^24.1.0",
         "concurrently": "^4.0.1",
@@ -40,6 +40,7 @@
         "prettier": "^1.16.4",
         "regenerator-runtime": "^0.13.1",
         "ts-jest": "^23.10.5",
+        "tslib": "^1.9.3",
         "tslint": "^5.14.0",
         "typescript": "^3.4.5"
     },

@@ -125,7 +125,13 @@ export function replaceAll(replace: IReplace) {
 
 export function brazilize(str: string) {
 	return titlelize(str)
-		.replace(/ D(a|e|i|o|u|as|os) /g, " $1 ".toLowerCase())
+		.replace(/ Da /g, " da ")
+		.replace(/ De /g, " de ")
+		.replace(/ Di /g, " di ")
+		.replace(/ Do /g, " do ")
+		.replace(/ Du /g, " du ")
+		.replace(/ Das /g, " das ")
+		.replace(/ Dos /g, " dos ")
 		.replace(/ Um /g, " um ")
 		.replace(/ Uns /g, " uns ")
 		.replace(/ Del /g, " del ");

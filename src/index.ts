@@ -4,3 +4,4 @@ export { default as LINQ } from "./linq";
 export { default as Regex } from "./regex";
 export { default as Functional } from "./functional";
 export { default as Strings } from "./strings";
+export { default as isEmpty } from "./comparable/Equals";

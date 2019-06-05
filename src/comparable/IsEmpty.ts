@@ -1,11 +1,11 @@
 export function isEmpty(object: unknown | any) {
-	if (typeof object === "undefined") {
+	if (typeof object === "undefined" || object === null) {
 		return true;
 	}
-	if (object === null || object === {} || object === []) {
+	if (Array.isArray(object) && object.length === 0) {
 		return true;
 	}
-	if (object === "") {
+	if (typeof object === "string" && object.trim().length === 0) {
 		return true;
 	}
 	for (const key in object) {

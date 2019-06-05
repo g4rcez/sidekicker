@@ -1,4 +1,4 @@
-export default function Map<T>(array: T[], fn: Function) {
+export default function Filter<T>(array: T[], fn: Function) {
 	if (array && array.length === 0) {
 		return [];
 	}

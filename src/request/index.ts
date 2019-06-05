@@ -1,24 +1,8 @@
+import { isEmpty } from "../comparable";
+
 export type HttpBodyMethods = "POST" | "PUT" | "PATCH" | "DELETE";
 
 const flatHeader = (header: any) => [...header].reduce((acc, el) => ({ ...acc, [el[0]]: el[1] }), {});
-
-const isEmpty = (object: object | string | undefined | any) => {
-	if (typeof object === "undefined") {
-		return true;
-	}
-	if (object === null || object === {} || object === []) {
-		return true;
-	}
-	if (object === "") {
-		return true;
-	}
-	for (const key in object) {
-		if (object.hasOwnProperty(key)) {
-			return false;
-		}
-	}
-	return true;
-};
 
 const getUserAgent = (name = "Mozilla FireFrogs") => {
 	if (window.navigator) {

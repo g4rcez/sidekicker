@@ -1,6 +1,6 @@
 const props = Object.prototype.hasOwnProperty;
 
-const isObject = (a: unknown, b: unknown) => a && b && typeof a === "object" && typeof b === "object";
+const areObject = (a: unknown, b: unknown) => a && b && typeof a === "object" && typeof b === "object";
 
 const createInstanceOf = (a: unknown, b: unknown, instance: any) => {
 	return [a instanceof instance, b instanceof instance];
@@ -11,7 +11,7 @@ export function Equals(value: any, target: any) {
 	if (value === target) {
 		return true;
 	}
-	if (!isObject(value, target)) {
+	if (!areObject(value, target)) {
 		return value !== value && target !== target;
 	}
 	const targetArr = Array.isArray(value);

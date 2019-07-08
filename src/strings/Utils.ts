@@ -96,7 +96,7 @@ export function mask({ text, pad = text.length / 4, maskStr = "*" }: IMask) {
 }
 
 export function reverse(str: string) {
-	str.split("").reduce((r: string, c: string) => `${c}${r}`, "");
+	return str.split("").reduce((r: string, c: string) => `${c}${r}`, "");
 }
 
 export function capitalize(chars: string) {

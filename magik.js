@@ -17,9 +17,7 @@ const read = (file) =>
 
 const write = (file, content) =>
 	new Promise((res, rej) =>
-		fs.writeFile(file, JSON.stringify(content, null, 4), (err) => {
-			return err ? rej([false, err]) : res(true);
-		}),
+		fs.writeFile(file, JSON.stringify(content, null, 4), (err) => (err ? rej([false, err]) : res(true))),
 	);
 
 const message = argv[0];

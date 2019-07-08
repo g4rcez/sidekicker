@@ -55,6 +55,9 @@ export const formatBrlToFloat = (currency: string) => {
 	return Number.parseFloat(final);
 };
 
+export const formatPaymentTicketBR = (ticket: string) =>
+	onlyNumbers(ticket).replace(/^(\d{5})(\d{5})(\d{5})(\d{6})(\d{5})(\d{6})(\d)(\d{14})$/, "$1.$2 $3.$4 $5.$6 $7 $8");
+
 export const format = {
 	formatCpf,
 	formatCep,

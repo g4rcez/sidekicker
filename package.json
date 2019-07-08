@@ -1,6 +1,6 @@
 {
     "name": "sidekicker",
-    "version": "0.0.24",
+    "version": "0.0.26",
     "description": "An abstract lib to help in our JS/TS projects",
     "main": "lib/index.js",
     "scripts": {
@@ -8,7 +8,7 @@
         "watch-node": "nodemon lib/index.js",
         "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
         "watch-ts": "tsc -w",
-        "build": "tsc -b",
+        "build": "tsc -b && find ./lib -name '*.js' | sed 's/.*/uglifyjs --compress -o \"&\" --mangle -- \"&\" /g' | sh -v",
         "lint": "tslint --config tslint.json -p .",
         "format": "prettier --write '{.,src/**}/*.{js,jsx,ts,tsx}'",
         "start": "npm run watch"
@@ -20,29 +20,28 @@
     },
     "license": "MIT",
     "dependencies": {
-        "axios": "^0.18.0",
+        "axios": "^0.19.0",
         "moment": "^2.24.0",
         "ramda": "^0.26.1"
     },
     "devDependencies": {
-        "@types/bluebird": "^3.5.26",
-        "@types/jest": "^24.0.13",
+        "@types/jest": "^24.0.15",
         "@types/mocha": "^5.2.7",
-        "@types/node": "^11.11.1",
-        "@types/ramda": "^0.26.3",
+        "@types/node": "^12.0.8",
+        "@types/ramda": "^0.26.9",
         "babel-core": "^6.26.3",
-        "babel-jest": "^24.1.0",
-        "concurrently": "^4.0.1",
-        "husky": "^1.3.1",
+        "babel-jest": "^24.8.0",
+        "concurrently": "^4.1.0",
+        "husky": "^2.4.1",
         "jest": "^24.8.0",
-        "nock": "^10.0.2",
-        "nodemon": "^1.18.6",
-        "prettier": "^1.16.4",
-        "regenerator-runtime": "^0.13.1",
-        "ts-jest": "^23.10.5",
-        "tslib": "^1.9.3",
-        "tslint": "^5.14.0",
-        "typescript": "^3.4.5"
+        "nock": "^10.0.6",
+        "nodemon": "^1.19.1",
+        "prettier": "^1.18.2",
+        "regenerator-runtime": "^0.13.2",
+        "ts-jest": "^24.0.2",
+        "tslib": "^1.10.0",
+        "tslint": "^5.17.0",
+        "typescript": "^3.5.2"
     },
     "husky": {
         "hooks": {}

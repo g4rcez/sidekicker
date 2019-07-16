@@ -3,3 +3,4 @@ export * from "./CNPJ";
 export * from "./CreditCard";
 export * from "./Email";
 export * from "./IsUrl";
+export * from "./Cellphone";

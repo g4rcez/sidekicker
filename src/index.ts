@@ -1,3 +1,10 @@
+export * from "./validations";
+export * from "./iterable";
+export * from "./linq";
+export * from "./regex";
+export * from "./functional";
+export * from "./strings";
+export * from "./comparable/Equals";
 export { default as Validations } from "./validations";
 export { default as Collection } from "./iterable";
 export { default as LINQ } from "./linq";

@@ -11,69 +11,67 @@ import uniqBy from "./uniqBy";
 import Where from "./Where";
 
 const sum = (key: string, array: any) =>
-	array.reduce((acc: number, el: any) => {
-		return acc + Number.parseFloat(`${el[key]}`);
-	}, 0);
+	array.reduce((acc: number, el: any) => acc + Number.parseFloat(`${el[key]}`), 0);
 
 export function Linq<T>(array: T[]): Linqs<T> {
 	const functions: Function[] = [];
 	const linqs: Linqs<T> = {
-		average(key: string) {
-			const arr = linqs.get();
-			return sum(key, linqs.get()) / arr.length;
+		Average(key: string) {
+			const arr = linqs.Get();
+			return sum(key, arr) / arr.length;
 		},
-		count: () => linqs.get().length,
+		Count: () => linqs.Get().length,
 		// @ts-ignore
-		countBy: (fn: Function) => linqs.get().filter(fn).length,
-		get: (): T[] => {
+		CountBy: (fn: Function) => linqs.Get().filter(fn).length,
+		Get: (): T[] => {
 			if (array.length === 0) {
 				return [];
 			}
 			return functions.reduce((acc, curr) => curr(acc), array);
 		},
-		groupBy: (key: string) => {
+		GroupBy: (key: string) => {
 			functions.push(GroupBy(key));
-			return linqs.get;
+			return linqs.Get;
 		},
-		head: (): T => linqs.get()[0],
-		ifEmpty: (value: T | T[]) => {
-			const values = linqs.get();
+		Head: (): T => linqs.Get()[0],
+		IfEmpty: (value: T | T[]) => {
+			const values = linqs.Get();
 			return values.length === 0 ? value : values;
 		},
-		join: (toConcat: T[]) => {
+		Join: (toConcat: T[]) => {
 			functions.push(concat(toConcat));
 			return linqs;
 		},
-		map: (fn: Function): Linqs<T> => {
+		Map: (fn: Function): Linqs<T> => {
 			functions.push(Map(fn));
 			return linqs;
 		},
-		orderBy: (key: string, rules?: OrdersRules) => {
+		OrderBy: (key: string, rules?: OrdersRules) => {
 			functions.push(OrderBy(key, rules));
 			return linqs;
 		},
-		paginate: (range: number, page = 0) => {
+		Paginate: (range: number, page = 0) => {
 			functions.push(Paginate(range, page));
 			return linqs;
 		},
-		reverse: () => {
+		Reverse: () => {
 			functions.push((arr: T[]) => arr.reverse());
 			return linqs;
 		},
-		select: (): T[] => linqs.get(),
-		sum: (key: string) => {
-			return sum(key, linqs.get());
+		Select: (): T[] => linqs.Get(),
+		Sum: (key: string) => {
+			return sum(key, linqs.Get());
 		},
-		tail: (): T => [...linqs.get()].slice(-1)[0],
-		uniq: () => {
+		Tail: (): T => [...linqs.Get()].slice(-1)[0],
+		Uniq: () => {
 			functions.push(uniq());
 			return linqs;
 		},
-		uniqBy: (key: string) => {
+		UniqBy: (key: string) => {
 			functions.push(uniqBy(key));
 			return linqs;
 		},
-		where: (key: string, operator: WhereOperator, value: any): Linqs<T> => {
+		Where: (key: string, operator: WhereOperator, value: any): Linqs<T> => {
 			functions.push(Where({ key, operator, value }));
 			return linqs;
 		},

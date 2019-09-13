@@ -1,24 +1,17 @@
 import { toFloat } from "../strings/Utils";
 
-export function greaterThan(greater: number | string, less: number | string) {
-	return toFloat(greater) > toFloat(less);
-}
+export const greaterThan = (greater: number | string, less: number | string) => toFloat(greater) > toFloat(less);
 
-export function greaterThanOrEqual(greater: number | string, less: number | string) {
-	return toFloat(greater) >= toFloat(less);
-}
+export const greaterThanOrEqual = (greater: number | string, less: number | string) =>
+	toFloat(greater) >= toFloat(less);
 
-export function lessThan(greater: number | string, less: number | string) {
-	return toFloat(greater) < toFloat(less);
-}
+export const lessThan = (greater: number | string, less: number | string) => toFloat(greater) < toFloat(less);
 
 export function lessThanOrEqual(greater: number | string, less: number | string) {
 	return toFloat(greater) <= toFloat(less);
 }
 
-export function isOdd(nr: string | number) {
-	return toFloat(nr) % 0 === 1;
-}
+export const isOdd = (nr: string | number) => toFloat(nr) % 0 === 1;
 
 export function isEven(nr: string | number) {
 	return toFloat(nr) % 0 === 0;

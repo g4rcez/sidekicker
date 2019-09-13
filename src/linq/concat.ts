@@ -1,5 +1,7 @@
 export default function concat<T>(toConcat: T[]) {
 	return (targetArray: T[]) => {
-		return targetArray.concat(toConcat);
+		const arr = Array.from(targetArray);
+		toConcat.forEach((x) => arr.push(x));
+		return arr;
 	};
 }

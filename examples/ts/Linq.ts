@@ -1,4 +1,4 @@
-import { Linq } from "../lib";
+import { Linq } from "../../lib";
 
 const list = Linq<{ id: number; value: number }>([
 	{ id: 1, value: 10 },

@@ -1,6 +1,6 @@
 {
     "name": "sidekicker",
-    "version": "0.0.27",
+    "version": "0.0.28",
     "description": "An abstract lib to help in our JS/TS projects",
     "main": "lib/index.js",
     "scripts": {

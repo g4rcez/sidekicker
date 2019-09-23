@@ -9,10 +9,11 @@ import Paginate from "./Paginate";
 import uniq from "./uniq";
 import uniqBy from "./uniqBy";
 import Where from "./Where";
+import Math from "../math";
 
-const sum = (key: string, array: any) =>
-	array.reduce((acc: number, el: any) => acc + Number.parseFloat(`${el[key]}`), 0);
+const sum = (key: string, array: any) => array.reduce((acc: number, el: any) => Math.sum(el[key], acc), 0);
 
+type FilterCallback = <T>(value: T, index: number, array: T[]) => boolean;
 export function Linq<T>(array: T[]): Linqs<T> {
 	const functions: Function[] = [];
 	const linqs: Linqs<T> = {
@@ -21,8 +22,7 @@ export function Linq<T>(array: T[]): Linqs<T> {
 			return sum(key, arr) / arr.length;
 		},
 		Count: () => linqs.Get().length,
-		// @ts-ignore
-		CountBy: (fn: Function) => linqs.Get().filter(fn).length,
+		CountBy: (fn: FilterCallback) => linqs.Get().filter(fn).length,
 		Get: (): T[] => {
 			if (array.length === 0) {
 				return [];
@@ -62,7 +62,10 @@ export function Linq<T>(array: T[]): Linqs<T> {
 		Sum: (key: string) => {
 			return sum(key, linqs.Get());
 		},
-		Tail: (): T => [...linqs.Get()].slice(-1)[0],
+		Tail: (): T => {
+			const arr = linqs.Get();
+			return arr[arr.length - 1];
+		},
 		Uniq: () => {
 			functions.push(uniq());
 			return linqs;

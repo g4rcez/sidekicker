@@ -8,7 +8,7 @@ export function equalsCaseInsensitive(str: string, compare: string) {
 
 export function firstAlphabeticalOrder(first: string, second: string, caseSensitive = true) {
 	if (caseSensitive) {
-		return first < second;
+		return first.localeCompare(second) < second.localeCompare(first);
 	}
 	return first.toLowerCase() < second.toLowerCase();
 }

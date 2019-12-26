@@ -1,51 +1,56 @@
-import moment, { MomentSetObject, Moment } from "moment";
+import dayjs, { Dayjs } from "dayjs";
+import isSameOrAfterPlugin from "dayjs/plugin/isSameOrAfter";
+import isSameOrBeforePlugin from "dayjs/plugin/isSameOrBefore";
+import isBetweenPlugin from "dayjs/plugin/isBetween";
 
-export const isAfter = (value: MomentSetObject, target: MomentSetObject) => moment(value).isAfter(moment(target));
+dayjs.extend(isSameOrAfterPlugin);
+dayjs.extend(isSameOrBeforePlugin);
+dayjs.extend(isBetweenPlugin);
+export const isAfter = (value: Dayjs, target: Dayjs) => dayjs(value).isAfter(dayjs(target));
 
-export const isSameOrAfter = (value: MomentSetObject, target: MomentSetObject) =>
-	moment(value).isSameOrAfter(moment(target));
+export const isSameOrAfter = (value: Dayjs, target: Dayjs) => dayjs(value).isSameOrAfter(dayjs(target));
 
-export const isBefore = (value: MomentSetObject, target: MomentSetObject) => moment(value).isBefore(moment(target));
+export const isBefore = (value: Dayjs, target: Dayjs) => dayjs(value).isBefore(dayjs(target));
 
-export function isSameOrBefore(value: MomentSetObject, target: MomentSetObject) {
-	return moment(value).isSameOrBefore(moment(target));
+export function isSameOrBefore(value: Dayjs, target: Dayjs) {
+	return dayjs(value).isSameOrBefore(dayjs(target));
 }
 
 export function tomorrow(dateCompare: string) {
-	return moment(dateCompare).isAfter(moment(), "day");
+	return dayjs(dateCompare).isAfter(dayjs(), "day");
 }
 
 export function yesterday(dateCompare: string) {
-	return moment(dateCompare).isBefore(moment(), "day");
+	return dayjs(dateCompare).isBefore(dayjs(), "day");
 }
 
-export const today = (dateCompare: string) => moment(dateCompare).isSame(moment(), "day");
+export const today = (dateCompare: string) => dayjs(dateCompare).isSame(dayjs(), "day");
 
-export const sameDay = (date: string) => moment(date).isSame(moment(), "day");
+export const sameDay = (date: string) => dayjs(date).isSame(dayjs(), "day");
 
 export function sameWeek(date: string) {
-	return moment(date).isSame(moment(), "week");
+	return dayjs(date).isSame(dayjs(), "week");
 }
 
 export function sameMouth(date: string) {
-	return moment(date).isSame(moment(), "month");
+	return dayjs(date).isSame(dayjs(), "month");
 }
 
 export function sameYear(date: string) {
-	return moment(date).isSame(moment(), "year");
+	return dayjs(date).isSame(dayjs(), "year");
 }
 
-export type MoString = string | Moment;
+export type MoString = string | Dayjs;
 
-const checkMoment = (value: MoString, mask = "Z") => {
-	if (moment.isMoment(value)) {
+const checkDate = (value: MoString, mask = "Z") => {
+	if (dayjs.isDayjs(value)) {
 		return value;
 	}
-	return moment(value, mask);
+	return dayjs(value, mask);
 };
 
 export function between(mask: string, init: MoString, end: MoString, value: MoString) {
-	return checkMoment(value, mask).isBetween(checkMoment(init, mask), checkMoment(end, mask));
+	return checkDate(value, mask).isBetween(checkDate(init, mask), checkDate(end, mask));
 }
 
 const dateHourMask = "DD/MM/YYYY HH:mm";
@@ -55,35 +60,35 @@ const defaultMask = "ZZ";
 
 export function toDate(date?: string, format = defaultMask, showToday = false) {
 	if (date) {
-		return moment(date, format).format(dateMask);
+		return dayjs(date, format).format(dateMask);
 	}
 	if (showToday) {
-		return moment().format(dateMask);
+		return dayjs().format(dateMask);
 	}
 	return "";
 }
 
 export function dateHour(date?: string, format = defaultMask, showToday = false) {
 	if (date) {
-		return moment(date, format).format(dateHourMask);
+		return dayjs(date, format).format(dateHourMask);
 	}
 	if (showToday) {
-		return moment().format(dateMask);
+		return dayjs().format(dateMask);
 	}
-	return moment().format(dateHourMask);
+	return dayjs().format(dateHourMask);
 }
 
 export function toHour(date: string, format = defaultMask, showToday = false) {
 	if (date) {
-		return moment(date, format).format(hourMask);
+		return dayjs(date, format).format(hourMask);
 	}
 	if (showToday) {
-		return moment().format(dateMask);
+		return dayjs().format(dateMask);
 	}
-	return moment().format(hourMask);
+	return dayjs().format(hourMask);
 }
 
 export const safeDateConvert = (date: string, mask = defaultMask, errorMsg = "Não definido") => {
-	const safe = moment(date);
+	const safe = dayjs(date);
 	return safe.isValid() ? safe.format(mask) : errorMsg;
 };

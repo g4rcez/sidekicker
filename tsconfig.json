@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
     "lib": [
-      "ESNext"
+      "ESNext",
+      "DOM"
     ],
     "incremental": true,
     "downlevelIteration": true,
+    "strict": true,
+    "strictBindCallApply": true,
+    "noStrictGenericChecks": true,
+    "noImplicitUseStrict": true,
     "declarationMap": true,
     "declarationDir": "./build",
     "rootDir": "./src",
@@ -16,7 +21,7 @@
     "esModuleInterop": true,
     "alwaysStrict": true,
     "noImplicitAny": true,
-    "noImplicitThis": false,
+    "noImplicitThis": true,
     "noImplicitReturns": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -27,6 +32,6 @@
     "src/index.ts"
   ],
   "include": [
-    "src/",
+    "src/"
   ]
 }

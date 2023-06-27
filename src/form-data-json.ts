@@ -10,6 +10,7 @@ type Recursive<T, Key extends keyof T> =
                 | `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
                 : never
         : never;
+
 type NullToUndefined<T> = T extends null ? undefined : T;
 
 type RecNTU<T> = {

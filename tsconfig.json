@@ -28,9 +28,6 @@
     "strictPropertyInitialization": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [
-    "src/index.ts"
-  ],
   "include": [
     "src/"
   ]

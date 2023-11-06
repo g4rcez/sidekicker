@@ -15,13 +15,13 @@ export const toCpf = (str: string) => onlyNumbers(str).replace(/(\d{3})(\d{3})(\
 
 export const toCnpj = (str: string) => onlyNumbers(str).replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
 
-export const toBrl = (n: number) => Intl.NumberFormat("pt-BR", {
-    currency: "BRL",
-    style: "currency"
-}).format(n).normalize("NFKD");
+export const number = (n: number, options: Intl.NumberFormatOptions & {
+    locale?: string
+}) => Intl.NumberFormat(options.locale, { style: "currency", ...options }).format(n).normalize("NFKD");
 
-export const toFormattedNumber = (n: number) => Intl.NumberFormat("pt-BR", { style: "number" }).format(n).normalize("NFKD");
+export const toBrl = (n: number) => number(n, { locale: "pt-BR", currency: "BRL" });
 
+export const toFormattedNumber = (n: number) => number(n, { style: "number" });
 
 export const toSlugCase = (str: string) => str
     .replace(/^\s+|\s+$/g, "")

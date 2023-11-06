@@ -19,5 +19,5 @@ type RecNTU<T> = {
 
 export const formToJson = <T extends any>(formData: FormData): RecNTU<T> => {
     const urlSearchParams = new URLSearchParams(formData as any);
-    return parse(urlSearchParams.toString(), qsParseOptions) as never;
+    return parse(urlSearchParams.toString(), qsParseOptions) as T;
 };

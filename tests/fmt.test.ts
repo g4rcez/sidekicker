@@ -1,12 +1,11 @@
-import { onlyNumbers, toBrl, toCellphone, toCnpj, toCpf } from "../src/fmt";
 import { describe, expect, it } from "vitest";
+import { onlyNumbers, toBrl, toCellphone, toCnpj, toCpf, toSlugCase, trimAll } from "../src/strings/fmt";
 
 const test = it.concurrent;
 
 describe("Should test fmt functions", () => {
     test("Should show only numbers", () => {
         expect(onlyNumbers("13a")).toBe("13");
-
     });
 
     test("Should show formatted numbers", () => {
@@ -19,5 +18,14 @@ describe("Should test fmt functions", () => {
         expect(toBrl(100)).toBe("R$ 100,00");
     });
 
+    test("Should slugify strings", () => {
+        expect(toSlugCase("é isso")).toBe("e-isso");
+        expect(toSlugCase("Não tente isso aí")).toBe("nao-tente-isso-ai");
+    });
+
+    test("Should trim all spaces", () => {
+        expect(trimAll("a                 a            ")).toBe("a a");
+        expect(trimAll("a      \t           a  \s          ")).toBe("a a");
+    });
 });
 

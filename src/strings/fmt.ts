@@ -1,3 +1,5 @@
+import { removeDiacritics } from "./diacritics";
+
 export const onlyNumbers = (str: string) => str.replace(/[^0-9]/, "");
 
 export const toCellphone = (str: string) => {
@@ -13,22 +15,27 @@ export const toCellphone = (str: string) => {
 
 export const toCpf = (str: string) => onlyNumbers(str).replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 
-export const toCnpj = (str: string) => onlyNumbers(str).replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+export const toCnpj = (str: string) =>
+    onlyNumbers(str).replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
 
-export const number = (n: number, options: Intl.NumberFormatOptions & {
-    locale?: string
-}) => Intl.NumberFormat(options.locale, { style: "currency", ...options }).format(n).normalize("NFKD");
+export const normalize = (str: string) => str.normalize("NFKD");
+
+export const number = (
+    n: number,
+    options: Intl.NumberFormatOptions & { locale?: string }
+) => normalize(Intl.NumberFormat(options.locale, { style: "currency", ...options }).format(n));
 
 export const toBrl = (n: number) => number(n, { locale: "pt-BR", currency: "BRL" });
 
-export const toFormattedNumber = (n: number) => number(n, { style: "number" });
+export const toFormattedNumber = (n: number) => number(n, { style: "decimal" });
 
-export const toSlugCase = (str: string) => str
-    .replace(/^\s+|\s+$/g, "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[·\/_,:;]/g, "-")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9 -]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+export const toSlugCase = (str: string) =>
+    removeDiacritics(str).replace(/^\s+|\s+$/g, "")
+        .toLowerCase()
+        .replace(/[·\/_,:;]/g, "-")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9 -]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+
+export const trimAll = (str: string) => str.replace(/[ \t\s]+/g," ").trim();

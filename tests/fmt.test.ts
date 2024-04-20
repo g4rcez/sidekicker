@@ -25,7 +25,7 @@ describe("Should test fmt functions", () => {
 
     test("Should trim all spaces", () => {
         expect(trimAll("a                 a            ")).toBe("a a");
-        expect(trimAll("a      \t           a  \s          ")).toBe("a a");
+        expect(trimAll("a      \t           a  s          ")).toBe("a a s");
     });
 });
 

@@ -1,7 +1,7 @@
 import { Fn } from "../types/utility.type";
 
 export const debounce = <T extends Fn>(fn: T, ms: number, immediate: boolean) => {
-    let timeout: number | null = null;
+    let timeout: NodeJS.Timeout | null = null;
     return function debounceFn(this: ThisType<T>) {
         const context = this;
         const args = arguments as any as Parameters<T>;

@@ -1,16 +1,6 @@
 import { parse } from "qs";
 import { qsParseOptions } from "./url";
 
-type Recursive<T, Key extends keyof T> =
-    Key extends string
-        ? T[Key] extends Date
-            ? Key
-            : T[Key] extends Record<string, any>
-                ? | `${Key}.${Recursive<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
-                | `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
-                : never
-        : never;
-
 type NullToUndefined<T> = T extends null ? undefined : T;
 
 type ParseNullToUndefined<T> = {

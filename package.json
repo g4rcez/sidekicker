@@ -8,14 +8,16 @@
     "format": "prettier --write './{src,tests}/**/*.ts'",
     "rm": "rm -rf build",
     "rm:config": "rm -rf build",
-    "build": "tsc -p tsconfig.build.json && rm -rf tsconfig.build.tsbuildinfo",
+    "build": "tsc -p tsconfig.json && rm -rf tsconfig.tsbuildinfo",
     "compile": "npm-run-all -s rm build rm:config",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:browser": "vitest --environment happy-dom run"
   },
   "author": "Allan Garcez <allan.f.garcez@gmail.com> (https://github.com/g4rcez)",
   "license": "MIT",
   "devDependencies": {
     "@types/qs": "6.9.15",
+    "happy-dom": "^14.7.1",
     "prettier": "2.8.8",
     "ts-toolbelt": "9.6.0",
     "typescript": "5.4.5",
@@ -27,6 +29,7 @@
     "yarn": "1.22.19"
   },
   "dependencies": {
+    "@types/node": "20.12.7",
     "qs": "6.11.2"
   }
 }

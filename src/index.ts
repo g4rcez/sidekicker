@@ -7,4 +7,8 @@ export { pipe } from "./fp/pipe";
 export * from "./math";
 export { joinPathname, queryStringFromUrl, toQueryString, trailingPaths, Url } from "./url";
 export { has, keys, deepMerge, getPath, setPath, convertPath, Objects, diff } from "./object";
+export { createCryptoModule } from "./crypto";
+export { Is } from "./is";
+export * from "./strings/fmt";
+export { removeDiacritics } from "./strings/diacritics";
 

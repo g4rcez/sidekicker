@@ -22,7 +22,7 @@ export class Dict<K, V> extends Map<K, V> {
     }
 
     public toJSON() {
-        return Array.from(this.values());
+        return Dict.toArray(this);
     }
 
     public map<Fn extends (value: V, key: K) => [K, V]>(fn: Fn) {

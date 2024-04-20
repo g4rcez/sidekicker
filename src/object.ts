@@ -47,7 +47,6 @@ const equals = (a: any, b: any): boolean => {
     return keys.every((k) => equals(a[k], b[k]));
 };
 
-
 export const diff = <T extends any, Keys extends AllPaths<T>[]>(a: T, b: T, keys: Keys) => keys.some((x) => !equals(getPath(a, x), getPath(b, x)));
 
 export const convertPath = (path: string) => (path as string).replace("[", ".").replace("]", "").split(".");
@@ -71,6 +70,4 @@ export const deepMerge = <T extends object>(defaults: T, settings: T) => {
     return settings;
 };
 
-export const Objects = {
-    has, keys, get: getPath, diff, set: setPath, convertPath
-};
+export const Objects = { has, keys, get: getPath, diff, set: setPath, convertPath };

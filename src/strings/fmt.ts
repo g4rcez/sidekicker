@@ -25,7 +25,9 @@ export const number = (
     options: Intl.NumberFormatOptions & { locale?: string }
 ) => normalize(Intl.NumberFormat(options.locale, { style: "currency", ...options }).format(n));
 
-export const toBrl = (n: number) => number(n, { locale: "pt-BR", currency: "BRL" });
+export const toMoney = (n: number, locale?: string, currency?: string) => number(n, { locale, currency });
+
+export const toBrl = (n: number) => toMoney(n, "pt-BR", "BRL");
 
 export const toFormattedNumber = (n: number) => number(n, { style: "decimal" });
 
@@ -38,4 +40,4 @@ export const toSlugCase = (str: string) =>
         .replace(/\s+/g, "-")
         .replace(/-+/g, "-");
 
-export const trimAll = (str: string) => str.replace(/[ \t\s]+/g," ").trim();
+export const trimAll = (str: string) => str.replace(/[ \t\s]+/g, " ").trim();

@@ -1,32 +1,40 @@
 {
   "compilerOptions": {
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
-    "incremental": true,
-    "downlevelIteration": true,
-    "strict": true,
-    "strictBindCallApply": true,
-    "declarationMap": true,
-    "declarationDir": "./build",
-    "rootDir": "./src",
-    "outDir": "./build",
-    "target": "ESNext",
+    "allowJs": false,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "allowUmdGlobalAccess": false,
+    "target": "ES2015",
     "declaration": true,
-    "composite": true,
-    "moduleResolution": "node",
+    "declarationMap": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "alwaysStrict": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist",
     "strictNullChecks": true,
     "strictFunctionTypes": true,
+    "strictBindCallApply": true,
     "strictPropertyInitialization": true,
-    "forceConsistentCasingInFileNames": true
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ]
   },
   "include": [
-    "src/"
+    "src"
   ]
 }

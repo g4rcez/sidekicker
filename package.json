@@ -1,6 +1,6 @@
 {
   "name": "sidekicker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lots of typescript utility functions",
   "source": "./src/index.ts",
   "types": "./dist/index.d.ts",

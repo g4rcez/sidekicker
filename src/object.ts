@@ -70,4 +70,20 @@ export const deepMerge = <T extends object>(defaults: T, settings: T) => {
     return settings;
 };
 
-export const Objects = { has, keys, get: getPath, diff, set: setPath, convertPath };
+export const merge = <A extends any, B extends any = A>(target: A, source: B): A & B => {
+    let output = Object.assign({}, target);
+    if (Is.object(target) && Is.object(source)) {
+        keys(source).forEach((key) => {
+            if (Is.object(source[key])) {
+                if (!(key in target)) Object.assign(output, { [key]: source[key] });
+                else (output as any)[key] = merge((target as any)[key], source[key]);
+            } else {
+                Object.assign(output, { [key]: source[key] });
+            }
+        });
+    }
+    return output as A & B;
+};
+
+
+export const Objects = { has, merge, keys, get: getPath, diff, set: setPath, convertPath };

@@ -27,3 +27,5 @@ export const throttle = <T extends Fn>(func: T, ms: number) => {
 };
 
 export const sleep = (ms: number): Promise<void> => new Promise(res => setTimeout(res, ms));
+
+export const negate = (prev: boolean) => !prev;

@@ -41,3 +41,5 @@ export const toSlugCase = (str: string) =>
         .replace(/-+/g, "-");
 
 export const trimAll = (str: string) => str.replace(/[ \t\s]+/g, " ").trim();
+
+export const pad = (n: number) => `${Math.floor(Math.abs(n))}`.padStart(2, "0");

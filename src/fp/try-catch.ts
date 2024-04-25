@@ -1,4 +1,4 @@
-import { Fn } from "../types/utility.type";
+import type { Fn, Instance } from "../types/utility.type";
 import { Either } from "./either";
 
 type ErrorTuple<T extends any = any> = [instance: T, handler: (T: T) => any];
@@ -28,7 +28,6 @@ export const tryCatch = <F extends Fn, Cases extends ErrorTuple[]>(fn: F, ...cas
     return handler;
 };
 
-type Instance = abstract new (...args: any) => any;
 
 
 export const raise =

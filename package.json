@@ -1,7 +1,9 @@
 {
   "name": "sidekicker",
   "version": "0.1.3",
+  "license": "MIT",
   "description": "Lots of typescript utility functions",
+  "author": "Allan Garcez <allan.f.garcez@gmail.com> (https://github.com/g4rcez)",
   "source": "./src/index.ts",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.mjs",
@@ -33,8 +35,6 @@
     "test": "vitest run",
     "test:browser": "vitest --environment happy-dom run"
   },
-  "author": "Allan Garcez <allan.f.garcez@gmail.com> (https://github.com/g4rcez)",
-  "license": "MIT",
   "dependencies": {
     "qs": "6.11.2"
   },

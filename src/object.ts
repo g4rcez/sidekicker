@@ -27,7 +27,7 @@ export const getPath = <T extends any>(obj: T, path: string | string[], defValue
     return result === undefined ? defValue : result;
 };
 
-const equals = (a: any, b: any): boolean => {
+export const equals = (a: any, b: any): boolean => {
     if (a === b) {
         return true;
     }
@@ -71,7 +71,7 @@ export const deepMerge = <T extends object>(defaults: T, settings: T) => {
 };
 
 export const merge = <A extends any, B extends any = A>(target: A, source: B): A & B => {
-    let output = Object.assign({}, target);
+    const output = Object.assign({}, target);
     if (Is.object(target) && Is.object(source)) {
         keys(source).forEach((key) => {
             if (Is.object(source[key])) {

@@ -1,6 +1,6 @@
 {
     "name": "sidekicker",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "license": "MIT",
     "description": "Lots of typescript utility functions",
     "author": "Allan Garcez <allan.f.garcez@gmail.com> (https://github.com/g4rcez)",

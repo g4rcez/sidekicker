@@ -1,4 +1,4 @@
-import type NodeCrypto from "node:crypto"
+import type NodeCrypto from "node:crypto";
 
 export const createCryptoModule = (crypto: Crypto | typeof NodeCrypto) => {
     const base64 = {
@@ -24,7 +24,7 @@ export const createCryptoModule = (crypto: Crypto | typeof NodeCrypto) => {
     };
 
     const publicKey = async (publicKey: string) =>
-        await crypto.subtle.importKey(
+        crypto.subtle.importKey(
             "spki",
             binaryPem(publicKey, "PUBLIC"),
             { name: "RSA-OAEP", hash: "SHA-256", length: 4096 },
@@ -81,4 +81,4 @@ export const createCryptoModule = (crypto: Crypto | typeof NodeCrypto) => {
     };
 
     return { base64, binaryPem, publicKey, encrypt, str2ab, generateRsaPair, decrypt, privateKey };
-}
+};

@@ -1,7 +1,7 @@
 export type { AllPaths, Primitives } from "./types/all-paths.type";
 export type { Fn, LooseString, Equals, StringToTuple, Override, Length, InferMapKey, InferMapValue, InferSetValue, Instance, IsUnion, Unary, Nullable, Merge } from "./types/utility.type";
 export { Either } from "./fp/either";
-export { tryCatch, raise } from "./fp/try-catch";
+export { tryCatch, raise, catchDefault } from "./fp/try-catch";
 export { raise as exception } from "./fp/try-catch";
 export { pipe } from "./fp/pipe";
 export * from "./math";

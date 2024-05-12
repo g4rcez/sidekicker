@@ -4,6 +4,8 @@ export type Fn = (...a: any[]) => any;
 
 export type Unary = (a: any) => any;
 
+export type OnlyString<T extends any> = T extends string ? T : never;
+
 export type LooseString<T extends string> = T | Omit<string, T>;
 
 export type Merge<T> = { [K in keyof T]: T[K] } & {};

@@ -1,6 +1,6 @@
 import { removeDiacritics } from "./diacritics";
 
-export const onlyNumbers = (str: string) => str.replace(/[^0-9]/, "");
+export const onlyNumbers = (str: string) => str.replace(/[^0-9]/g, "");
 
 export const toCellphone = (str: string) => {
     const phone = onlyNumbers(str);
@@ -20,10 +20,8 @@ export const toCnpj = (str: string) =>
 
 export const normalize = (str: string) => str.normalize("NFKD");
 
-export const number = (
-    n: number,
-    options: Intl.NumberFormatOptions & { locale?: string }
-) => normalize(Intl.NumberFormat(options.locale, { style: "currency", ...options }).format(n));
+export const number = (n: number, options: Intl.NumberFormatOptions & { locale?: string }) =>
+    normalize(Intl.NumberFormat(options.locale, { style: "currency", ...options }).format(n));
 
 export const toMoney = (n: number, locale?: string, currency?: string) => number(n, { locale, currency });
 
@@ -32,7 +30,8 @@ export const toBrl = (n: number) => toMoney(n, "pt-BR", "BRL");
 export const toFormattedNumber = (n: number) => number(n, { style: "decimal" });
 
 export const toSlugCase = (str: string) =>
-    removeDiacritics(str).replace(/^\s+|\s+$/g, "")
+    removeDiacritics(str)
+        .replace(/^\s+|\s+$/g, "")
         .toLowerCase()
         .replace(/[·\/_,:;]/g, "-")
         .replace(/[\u0300-\u036f]/g, "")

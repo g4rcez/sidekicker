@@ -36,19 +36,19 @@
         "test:browser": "vitest --environment happy-dom run"
     },
     "dependencies": {
-        "qs": "6.11.2"
+        "qs": "6.13.0"
     },
     "devDependencies": {
-        "@types/node": "20.12.7",
-        "@types/qs": "6.9.15",
-        "happy-dom": "^14.7.1",
-        "prettier": "2.8.8",
+        "@types/node": "22.9.0",
+        "@types/qs": "6.9.17",
+        "happy-dom": "15.11.0",
+        "prettier": "3.3.3",
         "ts-toolbelt": "9.6.0",
-        "tslib": "2.6.2",
-        "tsup": "8.0.2",
-        "typescript": "5.4.5",
-        "vite": "5.2.9",
-        "vitest": "1.5.0"
+        "tslib": "2.8.1",
+        "tsup": "8.3.5",
+        "typescript": "5.6.3",
+        "vite": "5.4.10",
+        "vitest": "2.1.4"
     },
     "volta": {
         "node": "20.12.2",

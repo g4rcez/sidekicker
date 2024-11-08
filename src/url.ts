@@ -19,3 +19,5 @@ export const qsParseOptions = {
 export const queryStringFromUrl = (url: string) => parse(url, qsParseOptions);
 
 export const toQueryString = <T extends {}>(obj: T) => stringify(obj, qsParseOptions);
+
+export const Url = { qs: toQueryString, qsToObject: queryStringFromUrl, join: joinPathname, trailingPaths };

@@ -1,39 +1,28 @@
+import type { Fn, Instance } from "../types/utility.type";
 import { Either } from "./either";
-import { Fn } from "../types/utility.type";
 
 type ErrorTuple<T extends any = any> = [instance: T, handler: (T: T) => any];
 
-type Instance = abstract new (...args: any) => any;
-
-type ResultFromInstance<Input extends null | undefined | Instance, Output> = Input extends null ?
-    [instance: null, handler: (e: null) => Output]
-    : Input extends undefined ? [instance: undefined, handler: (e: undefined) => Output] : [instance: Input, handler: (e: InstanceType<NonNullable<Input>>) => Output]
-
-type HandlerFromInstance<Input extends null | undefined | Instance, Output> = Input extends null ?
-    ((e: null) => Output)
-    : Input extends undefined ? ((e: undefined) => Output) : ((e: InstanceType<NonNullable<Instance>>) => Output)
-
-export const exception = <T extends Instance | null | undefined, B>(instance: T, handler: HandlerFromInstance<T, B>): ResultFromInstance<T, B> => [instance, handler] as any;
+const DEFAULT_CATCH = "default";
 
 export const tryCatch = <F extends Fn, Cases extends ErrorTuple[]>(fn: F, ...cases: Cases):
     (...p: Parameters<F>) =>
-        ReturnType<F> extends Promise<unknown>
-            ? Promise<Either<ReturnType<Cases[number][1]>, ReturnType<F>>>
-            : Either<ReturnType<Cases[number][1]>, ReturnType<F>> => {
-    const internal = cases.filter(x => x[0] !== null && x[0] !== undefined);
-    const map = new WeakMap(internal);
+        ReturnType<F> extends Promise<any>
+            ? Promise<Either<ReturnType<Cases[any][1]>, ReturnType<F>>>
+            : Either<ReturnType<Cases[any][1]>, ReturnType<F>> => {
+    const instances = new Map(cases);
     const catchHandler = (e: any) => {
-        if (e === null || e === undefined) {
-            const handler = cases.find(x => x[0] === e);
-            return handler ? Either.error(handler[1](e)) : Either.error(e);
-        }
-        const errorHandler = map.get(e?.constructor);
+        const errorHandler = instances.get(e?.constructor ?? e);
         if (errorHandler) {
             return Either.error(errorHandler(e));
         }
+        const defaultHandler = instances.get(DEFAULT_CATCH);
+        if (defaultHandler) {
+            return Either.error(defaultHandler(e));
+        }
         return Either.error(e);
     };
-    return function handler(...a: Parameters<typeof fn>) {
+    const handler: any = (...a: any[]) => {
         try {
             const maybePromise = fn(...a);
             if (maybePromise instanceof Promise) return maybePromise.then(x => Either.success(x)).catch(catchHandler);
@@ -41,6 +30,20 @@ export const tryCatch = <F extends Fn, Cases extends ErrorTuple[]>(fn: F, ...cas
         } catch (e) {
             return catchHandler(e);
         }
-    } as any;
+    };
+    return handler;
 };
 
+
+export const raise =
+    <T extends Instance | undefined | null, Return, Handler extends (e: T extends Instance ? InstanceType<T> : T) => Return>
+    (instance: T, handler: Handler):
+        [instance: T, handler: Handler] => [instance, handler];
+
+export const catchDefault =
+    <Return, Handler extends <T extends Error | any>(e: T) => Return>
+    (handler: Handler):
+        [instance: typeof DEFAULT_CATCH, handler: Handler] => [DEFAULT_CATCH, handler];
+
+
+tryCatch.raise = raise;

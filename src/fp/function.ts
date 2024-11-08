@@ -1,4 +1,4 @@
-import { Fn } from "./types/utility.type";
+import { Fn } from "../types/utility.type";
 
 export const debounce = <T extends Fn>(fn: T, ms: number, immediate: boolean) => {
     let timeout: NodeJS.Timeout | null = null;
@@ -25,3 +25,7 @@ export const throttle = <T extends Fn>(func: T, ms: number) => {
         }
     };
 };
+
+export const sleep = (ms: number): Promise<void> => new Promise(res => setTimeout(res, ms));
+
+export const negate = (prev: boolean) => !prev;

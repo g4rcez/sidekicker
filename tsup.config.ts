@@ -7,6 +7,6 @@ export default defineConfig({
   treeshake: true,
   clean: true,
   cjsInterop: true,
-  globalName: "Linq",
-  name: "Linq",
+  globalName: "sidekicker",
+  name: "sidekicker",
 });

@@ -1,18 +1,22 @@
 import { Is } from "./is";
-import { AllPaths } from "./types/all-paths.type";
+import type { AllPaths } from "./types/all-paths.type";
 
-const setHelper = (obj: any, path: string[], value: any) => {
-    const [current, ...rest] = path;
-    if (rest.length > 0) {
-        if (!obj[current]) {
-            const isNumber = `${+rest[0]}` === rest[0];
-            obj[current] = isNumber ? [] : {};
-        }
-        if (typeof obj[current] !== "object") {
-            const isNumber = `${+rest[0]}` === rest[0];
-            obj[current] = setHelper(isNumber ? [] : {}, rest, value);
-        } else obj[current] = setHelper(obj[current], rest, value);
-    } else obj[current] = value;
+const setHelper = (obj: object, path: Array<string | number>, value: unknown): object => {
+    const current = String(path[0] ?? "undefined");
+    const rest = path.slice(1);
+    if (rest.length === 0) {
+        Reflect.set(obj, current, value);
+        return obj;
+    }
+    const next = rest[0];
+    const isArray = typeof next === "number" || `${Number(next)}` === String(next);
+    let child = Reflect.get(obj, current);
+    if (!child) {
+        child = isArray ? [] : {};
+        Reflect.set(obj, current, child);
+    }
+    if (typeof child !== "object" || child === null) child = isArray ? [] : {};
+    Reflect.set(obj, current, setHelper(child, rest, value));
     return obj;
 };
 
@@ -47,43 +51,49 @@ export const equals = (a: any, b: any): boolean => {
     return keys.every((k) => equals(a[k], b[k]));
 };
 
-export const diff = <T extends any, Keys extends AllPaths<T>[]>(a: T, b: T, keys: Keys) => keys.some((x) => !equals(getPath(a, x), getPath(b, x)));
+export const diff = <T extends any, Keys extends AllPaths<T>[]>(a: T, b: T, keys: Keys) =>
+    keys.some((x) => !equals(getPath(a, x), getPath(b, x)));
 
 export const convertPath = (path: string) => (path as string).replace("[", ".").replace("]", "").split(".");
 
 export const setPath = <O extends object>(o: O, path: AllPaths<O> | Array<string | number> | string, value: any) => {
     const pathArr = Array.isArray(path) ? path : convertPath(path);
     const obj = structuredClone(o);
-    setHelper(obj, pathArr as string[], value);
+    setHelper(obj, pathArr, value);
     return obj;
 };
 
-export const deepMerge = <T extends object>(defaults: T, settings: T) => {
-    Object.keys(defaults).forEach(key => {
-        const value = (settings as any)[key];
+export const deepMerge = <Defaults extends object, Settings extends object>(
+    defaults: Defaults,
+    settings: Settings,
+): Settings & Defaults => {
+    Object.keys(defaults).forEach((key) => {
+        const defaultValue = Reflect.get(defaults, key);
+        const value = Reflect.get(settings, key);
         if (Is.undefined(value)) {
-            (settings as any)[key] = value;
-        } else if (Is.object(value) && Is.object(value)) {
-            deepMerge(value, value);
+            Reflect.set(settings, key, defaultValue);
+        } else if (Is.object(value) && Is.object(defaultValue)) {
+            deepMerge(defaultValue, value);
         }
     });
-    return settings;
+    return settings as Settings & Defaults;
 };
 
 export const merge = <A extends any, B extends any = A>(target: A, source: B): A & B => {
     const output = Object.assign({}, target);
     if (Is.object(target) && Is.object(source)) {
         keys(source).forEach((key) => {
-            if (Is.object(source[key])) {
-                if (!(key in target)) Object.assign(output, { [key]: source[key] });
-                else (output as any)[key] = merge((target as any)[key], source[key]);
+            const sourceValue = source[key];
+            if (Is.object(sourceValue)) {
+                const targetValue = Reflect.get(target, key);
+                const base = Is.object(targetValue) ? targetValue : {};
+                Reflect.set(output, key, merge(base, sourceValue));
             } else {
-                Object.assign(output, { [key]: source[key] });
+                Reflect.set(output, key, sourceValue);
             }
         });
     }
     return output as A & B;
 };
-
 
 export const Objects = { has, merge, keys, get: getPath, diff, set: setPath, convertPath };

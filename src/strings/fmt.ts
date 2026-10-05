@@ -8,8 +8,8 @@ export const toCellphone = (str: string) => {
     if (phone.length === 9) return phone.replace(/(\d{5})(\d{4})/, "$1-$2");
     if (phone.length === 10) return phone.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
     if (phone.length === 11) return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
-    if (phone.length === 13) return phone.replace(/(\d{2})(\d{2})(\d{4})(\d{4})/, "+$1 $2 $3-$4");
-    if (phone.length === 14) return phone.replace(/(\d{2})(\d{2})(\d{5})(\d{4})/, "+$1 $2 $3-$4");
+    if (phone.length === 12) return phone.replace(/(\d{2})(\d{2})(\d{4})(\d{4})/, "+$1 $2 $3-$4");
+    if (phone.length === 13) return phone.replace(/(\d{2})(\d{2})(\d{5})(\d{4})/, "+$1 $2 $3-$4");
     return str;
 };
 
@@ -23,7 +23,11 @@ export const normalize = (str: string) => str.normalize("NFKD");
 export const number = (n: number, options: Intl.NumberFormatOptions & { locale?: string }) =>
     normalize(Intl.NumberFormat(options.locale, { style: "currency", ...options }).format(n));
 
-export const toMoney = (n: number, locale?: string, currency?: string) => number(n, { locale, currency });
+export const toMoney = (n: number, locale?: string, currency?: string) =>
+    number(n, {
+        ...(locale === undefined ? {} : { locale }),
+        ...(currency === undefined ? {} : { currency }),
+    });
 
 export const toBrl = (n: number) => toMoney(n, "pt-BR", "BRL");
 
@@ -33,7 +37,7 @@ export const toSlugCase = (str: string) =>
     removeDiacritics(str)
         .replace(/^\s+|\s+$/g, "")
         .toLowerCase()
-        .replace(/[·\/_,:;]/g, "-")
+        .replace(/[·/_,:;]/g, "-")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9 -]/g, "")
         .replace(/\s+/g, "-")

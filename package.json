@@ -1,58 +1,60 @@
 {
     "name": "sidekicker",
     "version": "0.1.9",
-    "license": "MIT",
     "description": "Lots of typescript utility functions",
+    "license": "MIT",
     "author": "Allan Garcez <allan.f.garcez@gmail.com> (https://github.com/g4rcez)",
     "source": "./src/index.ts",
-    "types": "./dist/index.d.ts",
-    "main": "./dist/index.js",
-    "module": "./dist/index.js",
     "files": [
-        "./dist"
+        "dist"
     ],
+    "type": "module",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "types": {
-                "import": "./dist/index.d.ts",
-                "require": "./dist/index.d.ts",
-                "default": "./dist/index.d.ts"
+            "import": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
             },
-            "default": {
-                "type": "./dist/index.d.ts",
-                "import": "./dist/index.mjs",
-                "default": "./dist/index.js",
-                "require": "./dist/index.js"
+            "require": {
+                "types": "./dist/index.d.cts",
+                "default": "./dist/index.cjs"
             }
         }
     },
     "scripts": {
-        "format": "prettier --write './{src,tests}/**/*.ts'",
-        "rm": "rm -rf build",
-        "rm:config": "rm -rf build",
-        "build": "tsup",
-        "compile": "npm-run-all -s rm build rm:config",
-        "test": "vitest run",
-        "test:browser": "vitest --environment happy-dom run"
+        "build": "vp pack",
+        "check": "vp check",
+        "format": "vp fmt",
+        "format:check": "vp fmt --check",
+        "lint": "vp lint",
+        "typecheck": "tsc --noEmit",
+        "test": "vp test",
+        "test:coverage": "vp test run --coverage",
+        "smoke:node": "node tests/runtime-smoke.mjs",
+        "smoke:bun": "bun tests/runtime-smoke.mjs",
+        "smoke:deno": "deno task smoke"
     },
     "dependencies": {
-        "qs": "6.13.0"
+        "qs": "^6.16.0"
     },
     "devDependencies": {
-        "@types/node": "22.9.0",
-        "@types/qs": "6.9.17",
-        "happy-dom": "15.11.0",
-        "prettier": "3.3.3",
-        "ts-toolbelt": "9.6.0",
-        "tslib": "2.8.1",
-        "tsup": "8.3.5",
-        "typescript": "5.6.3",
-        "vite": "5.4.10",
-        "vitest": "2.1.4"
+        "@types/node": "^26.6.4",
+        "@types/qs": "^6.15.1",
+        "@vitest/coverage-v8": "5.0.1",
+        "ts-toolbelt": "^9.6.0",
+        "typescript": "^7.0.2",
+        "vite-plus": "1.0.0"
+    },
+    "overrides": {
+        "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0",
+        "vitest": "5.0.1"
     },
     "volta": {
-        "node": "20.12.2",
-        "yarn": "1.22.19",
-        "npm": "10.5.2"
-    }
+        "node": "24.18.0",
+        "npm": "11.16.0"
+    },
+    "packageManager": "npm@11.16.0"
 }

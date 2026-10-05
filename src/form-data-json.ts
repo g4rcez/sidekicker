@@ -4,7 +4,11 @@ import { qsParseOptions } from "./url";
 type NullToUndefined<T> = T extends null ? undefined : T;
 
 type ParseNullToUndefined<T> = {
-    [K in keyof T]: T[K] extends {} ? ParseNullToUndefined<T[K]> : T[K] extends any[] ? ParseNullToUndefined<T[K]> : NullToUndefined<T[K]>;
+    [K in keyof T]: T[K] extends {}
+        ? ParseNullToUndefined<T[K]>
+        : T[K] extends any[]
+          ? ParseNullToUndefined<T[K]>
+          : NullToUndefined<T[K]>;
 };
 
 export const formToJson = <T extends any>(formData: FormData): ParseNullToUndefined<T> => {

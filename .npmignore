@@ -1,4 +1,2 @@
-.prettierrc
 tsconfig.tsbuildinfo
 tsconfig.json
-tsconfig.build.json

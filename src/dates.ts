@@ -7,11 +7,16 @@ const getTzOffset = (date: Date) => {
 
 export const isoTz = (date: Date) =>
     date.getFullYear() +
-    "-" + pad(date.getMonth() + 1) +
-    "-" + pad(date.getDate()) +
-    "T" + pad(date.getHours()) +
-    ":" + pad(date.getMinutes()) +
-    ":" + pad(date.getSeconds()) +
+    "-" +
+    pad(date.getMonth() + 1) +
+    "-" +
+    pad(date.getDate()) +
+    "T" +
+    pad(date.getHours()) +
+    ":" +
+    pad(date.getMinutes()) +
+    ":" +
+    pad(date.getSeconds()) +
     getTzOffset(date);
 
 export const isIsoDate = (str: string) => {

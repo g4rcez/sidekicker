@@ -7,4 +7,3 @@ export const inc = (n: number) => n + 1;
 export const dec = (n: number) => n - 1;
 
 export const clamp = (min: number, x: number, max: number) => Math.min(Math.max(x, min), max);
-

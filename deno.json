@@ -1,0 +1,9 @@
+{
+    "imports": {
+        "qs": "npm:qs@6.16.0"
+    },
+    "tasks": {
+        "build": "node node_modules/vite-plus/bin/vp pack",
+        "smoke": "deno run tests/runtime-smoke.mjs"
+    }
+}

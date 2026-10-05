@@ -1,28 +1,35 @@
+type TransformResult<Fn extends (...args: never[]) => unknown, E> =
+    ReturnType<Fn> extends Promise<infer Result> ? Promise<Either<E, Result>> : Either<E, ReturnType<Fn>>;
+
 const n = undefined as never;
 
 export class Either<E, S> {
-    private constructor(public error: E, public success: S) {
-    }
+    private constructor(
+        public error: E,
+        public success: S,
+    ) {}
 
-    public static error<E1>(e: E1) {
+    public static error<E1>(this: void, e: E1) {
         return new Either<E1, never>(e, n);
     }
 
-    public static success<S1>(e: S1) {
+    public static success<S1>(this: void, e: S1) {
         return new Either<never, S1>(n, e);
     }
 
-    public static transform<Fn extends (...a: any[]) => any, E>(fn: Fn) {
-        return (
-            ...params: Parameters<Fn>
-        ): ReturnType<Fn> extends Promise<infer R>
-            ? Promise<Either<E, R>>
-            : Either<E, ReturnType<Fn>> => {
+    public static transform<Fn extends (...args: never[]) => unknown, E>(
+        fn: Fn,
+    ): (...params: Parameters<Fn>) => TransformResult<Fn, E> {
+        return (...params) => {
             try {
                 const result = fn(...params);
-                return result instanceof Promise ? result.then(Either.success).catch(Either.error) as any : Either.success(result) as any;
-            } catch (e) {
-                return Either.error(e) as any;
+                if (result instanceof Promise) {
+                    return result.then(Either.success).catch(Either.error) as unknown as TransformResult<Fn, E>;
+                }
+                return Either.success(result) as unknown as TransformResult<Fn, E>;
+            } catch (error) {
+                // E is caller-declared; this method does not validate thrown values.
+                return Either.error(error) as unknown as TransformResult<Fn, E>;
             }
         };
     }

@@ -2,7 +2,8 @@ import { parse, stringify } from "qs";
 
 export const trailingPaths = (str: string) => str.replace(/\/+$/g, "");
 
-export const joinPathname = (baseURL: string, ...urls: string[]) => urls.reduce((acc, el) => trailingPaths(acc) + "/" + el.replace(/^\/+/, ""), baseURL);
+export const joinPathname = (baseURL: string, ...urls: string[]) =>
+    urls.reduce((acc, el) => trailingPaths(acc) + "/" + el.replace(/^\/+/, ""), baseURL);
 
 export const qsParseOptions = {
     allowDots: true,
@@ -13,7 +14,7 @@ export const qsParseOptions = {
     allowPrototypes: false,
     depth: Number.MAX_SAFE_INTEGER,
     arrayLimit: Number.MAX_SAFE_INTEGER,
-    parameterLimit: Number.MAX_SAFE_INTEGER
+    parameterLimit: Number.MAX_SAFE_INTEGER,
 } as const;
 
 export const queryStringFromUrl = (url: string) => parse(url, qsParseOptions);

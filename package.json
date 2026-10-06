@@ -1,6 +1,6 @@
 {
     "name": "sidekicker",
-    "version": "0.1.9",
+    "version": "1.0.0",
     "description": "TypeScript utilities, including deferred LINQ-to-Objects queries",
     "license": "MIT",
     "author": "Allan Garcez <allan.f.garcez@gmail.com> (https://github.com/g4rcez)",

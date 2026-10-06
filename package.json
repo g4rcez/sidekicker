@@ -1,7 +1,7 @@
 {
     "name": "sidekicker",
     "version": "0.1.9",
-    "description": "Lots of typescript utility functions",
+    "description": "TypeScript utilities, including deferred LINQ-to-Objects queries",
     "license": "MIT",
     "author": "Allan Garcez <allan.f.garcez@gmail.com> (https://github.com/g4rcez)",
     "source": "./src/index.ts",
@@ -33,6 +33,7 @@
         "typecheck": "tsc --noEmit",
         "test": "vp test",
         "test:coverage": "vp test run --coverage",
+        "bench": "npm run build && npm exec -- vp pack src/dict.ts --format esm --out-dir node_modules/.cache/sidekicker-benchmark && node benchmarks/performance.mjs",
         "smoke:node": "node tests/runtime-smoke.mjs",
         "smoke:bun": "bun tests/runtime-smoke.mjs",
         "smoke:deno": "deno task smoke"

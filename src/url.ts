@@ -2,8 +2,13 @@ import { parse, stringify } from "qs";
 
 export const trailingPaths = (str: string) => str.replace(/\/+$/g, "");
 
-export const joinPathname = (baseURL: string, ...urls: string[]) =>
-    urls.reduce((acc, el) => trailingPaths(acc) + "/" + el.replace(/^\/+/, ""), baseURL);
+export const joinPathname = (baseURL: string, ...urls: string[]) => {
+    let result = baseURL;
+    for (let index = 0; index < urls.length; index++) {
+        result = trailingPaths(result) + "/" + urls[index]!.replace(/^\/+/, "");
+    }
+    return result;
+};
 
 export const qsParseOptions = {
     allowDots: true,

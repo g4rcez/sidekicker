@@ -4,6 +4,7 @@
     },
     "tasks": {
         "build": "node node_modules/vite-plus/bin/vp pack",
-        "smoke": "deno run tests/runtime-smoke.mjs"
+        "smoke": "deno run tests/runtime-smoke.mjs",
+        "test": "node node_modules/vite-plus/bin/vp test run"
     }
 }

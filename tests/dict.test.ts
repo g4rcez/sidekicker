@@ -27,6 +27,45 @@ describe("Dict", () => {
         expect(JSON.stringify(byTeam)).toBe(JSON.stringify([people.slice(0, 2), [people[2]]]));
     });
 
+    it("preserves last-write keys and first-seen group order", () => {
+        const items = [
+            { id: 1, group: "a", value: "first" },
+            { id: 1, group: "a", value: "last" },
+            { id: 2, group: "a", value: "second" },
+            { id: 3, group: "b", value: "third" },
+        ];
+        const byId = Dict.from("id", items, (item) => item.value);
+        const byGroup = Dict.group("group", items);
+
+        expect([...byId]).toEqual([
+            [1, "last"],
+            [2, "second"],
+            [3, "third"],
+        ]);
+        expect(byGroup.get("a")).toEqual(items.slice(0, 3));
+        expect(byGroup.get("b")).toEqual([items[3]]);
+    });
+
+    it("preserves sparse-array callback behavior before reporting invalid entries", () => {
+        const items: Array<{ id: number; value: string }> = [];
+        items.length = 3;
+        items[0] = { id: 1, value: "first" };
+        items[2] = { id: 3, value: "third" };
+        const visited: number[] = [];
+
+        expect(() =>
+            Dict.from("id", items, (item) => {
+                visited.push(item.id);
+                return item.value;
+            }),
+        ).toThrow(TypeError);
+        expect(visited).toEqual([1, 3]);
+        expect([...Dict.group("id", items)]).toEqual([
+            [1, [items[0]]],
+            [3, [items[2]]],
+        ]);
+    });
+
     it("maps entries, removes keys, and clones without sharing map state", () => {
         const original = Dict.from("id", people, (person: Person) => person.name);
         const uppercased = original.map((name: string, id: number) => [id, name.toUpperCase()] as [number, string]);

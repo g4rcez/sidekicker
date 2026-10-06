@@ -7,6 +7,13 @@ describe("URL utilities", () => {
         expect(joinPathname("https://example.test/api///", "/users/", "/7")).toBe("https://example.test/api/users/7");
     });
 
+    it("preserves the base with no segments and handles empty segments", () => {
+        const base = "https://example.test/api///";
+        expect(joinPathname(base)).toBe(base);
+        expect(joinPathname("root///", "")).toBe("root/");
+        expect(joinPathname("root///", "/users///", "/7")).toBe("root/users/7");
+    });
+
     it("round-trips nested values through query strings", () => {
         const value = { user: { name: "Ada" }, tags: ["typescript", "deno"] };
         const parsed = queryStringFromUrl(toQueryString(value));

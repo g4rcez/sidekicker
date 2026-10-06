@@ -7,10 +7,21 @@ export class Dict<K, V> extends Map<K, V> {
         Fn extends ((item: Item) => any) | undefined,
     >(key: K, list: Item[], fn?: Fn) {
         const get = Is.function(key) ? key : (item: Item) => (item as any)[key];
-        return new Dict<
-            K extends keyof Item ? Item[K] : string,
-            Fn extends undefined ? Item : ReturnType<NonNullable<Fn>>
-        >(list.map((x) => [get(x), fn ? fn(x) : x]));
+        type Key = K extends keyof Item ? Item[K] : string;
+        type Value = Fn extends undefined ? Item : ReturnType<NonNullable<Fn>>;
+        const result = new Dict<Key, Value>();
+        const length = list.length;
+        let hasHole = false;
+        for (let index = 0; index < length; index++) {
+            if (!(index in list)) {
+                hasHole = true;
+                continue;
+            }
+            const item = list[index] as Item;
+            result.set(get(item) as Key, (fn ? fn(item) : item) as Value);
+        }
+        if (hasHole) throw new TypeError("Dictionary entries must be dense");
+        return result;
     }
 
     public static toArray<K, V>(dict: Dict<K, V>) {
@@ -21,13 +32,21 @@ export class Dict<K, V> extends Map<K, V> {
         key: K,
         array: T[],
     ): Dict<K extends keyof T ? T[K] : string, T[]> {
-        const dict = new Dict<K extends keyof T ? T[K] : string, T[]>();
-        const get = Is.function(key) ? key : (item: T) => (item as any)[key];
-        array.forEach((item) => {
-            const id: any = get(item);
-            const group: any = dict.get(id) || [];
-            dict.set(id, [...group, item]);
-        });
+        type GroupKey = K extends keyof T ? T[K] : string;
+        const keyOf = Is.function(key) ? key : (item: T) => (item as any)[key];
+        const dict = new Dict<GroupKey, T[]>();
+        const length = array.length;
+        for (let index = 0; index < length; index++) {
+            if (!(index in array)) continue;
+            const item = array[index] as T;
+            const id = keyOf(item) as GroupKey;
+            const group = dict.get(id);
+            if (group === undefined) {
+                dict.set(id, [item]);
+                continue;
+            }
+            group.push(item);
+        }
         return dict;
     }
 

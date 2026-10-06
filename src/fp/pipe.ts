@@ -58,9 +58,11 @@ export const pipe = <First extends Fn, Second extends Unary, Rest extends F.Narr
 ): CreatePipe<
     Pipe<First, [First, Second, ...Rest]>,
     ExtractInfo<[First, Second, ...Rest], Pipe<First, [First, Second, ...Rest]>>
-> =>
-    ([first, second, ...rest] as Fn[]).reduce(
-        (acc, fn) =>
-            (...args: any[]) =>
-                fn(acc(...args)),
-    ) as any;
+> => {
+    return ((...args: Parameters<First>) => {
+        let value: unknown = first(...args);
+        value = second(value as never);
+        for (const fn of rest) value = fn(value as never);
+        return value;
+    }) as any;
+};

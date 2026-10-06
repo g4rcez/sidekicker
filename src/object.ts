@@ -23,11 +23,51 @@ const setHelper = (obj: object, path: Array<string | number>, value: unknown): o
 export const has = <T extends {}, K extends keyof T>(o: T, k: K): k is K => Reflect.has(o, k);
 
 export const keys = <T extends {}>(t: T) => Object.keys(t) as Array<keyof T>;
+const normalizedKey = (key: PropertyKey) => (typeof key === "number" ? String(key) : key);
+
+const copyOwnProperty = (target: Record<PropertyKey, unknown>, key: PropertyKey, value: unknown) => {
+    if (key === "__proto__") {
+        Object.defineProperty(target, key, { configurable: true, enumerable: true, value, writable: true });
+        return;
+    }
+    target[key] = value;
+};
+
+export const pick = <T extends object, K extends keyof T>(object: T, selectedKeys: readonly K[]): Pick<T, K> => {
+    const result: Record<PropertyKey, unknown> = {};
+    for (let index = 0; index < selectedKeys.length; index++) {
+        const key = normalizedKey(selectedKeys[index] as PropertyKey);
+        if (!Object.prototype.propertyIsEnumerable.call(object, key)) continue;
+        copyOwnProperty(result, key, Reflect.get(object, key));
+    }
+    return result as Pick<T, K>;
+};
+
+export const omit = <T extends object, K extends keyof T>(object: T, omittedKeys: readonly K[]): Omit<T, K> => {
+    const omitted = new Set<PropertyKey>();
+    for (let index = 0; index < omittedKeys.length; index++) {
+        omitted.add(normalizedKey(omittedKeys[index] as PropertyKey));
+    }
+
+    const result: Record<PropertyKey, unknown> = {};
+    for (const key of Reflect.ownKeys(object)) {
+        if (omitted.has(key) || !Object.prototype.propertyIsEnumerable.call(object, key)) continue;
+        copyOwnProperty(result, key, Reflect.get(object, key));
+    }
+    return result as Omit<T, K>;
+};
 
 export const getPath = <T extends any>(obj: T, path: string | string[], defValue?: any) => {
     if (!path) return undefined;
     const pathArray: any = Array.isArray(path) ? path : path.match(/([^[.\]])+/g);
-    const result = pathArray.reduce((prevObj: any, key: any) => prevObj && prevObj[key], obj);
+    let result: any = obj;
+    const length = pathArray.length;
+    for (let index = 0; index < length; index++) {
+        if (index in pathArray) {
+            const key = pathArray[index];
+            result = result && result[key];
+        }
+    }
     return result === undefined ? defValue : result;
 };
 
@@ -96,4 +136,4 @@ export const merge = <A extends any, B extends any = A>(target: A, source: B): A
     return output as A & B;
 };
 
-export const Objects = { has, merge, keys, get: getPath, diff, set: setPath, convertPath };
+export const Objects = { has, merge, keys, pick, omit, get: getPath, diff, set: setPath, convertPath };

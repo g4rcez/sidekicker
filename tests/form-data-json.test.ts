@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vite-plus/test";
-import { formToJson } from "../src/form-data-json";
+import { formToJson } from "../src";
 
 describe("formToJson", () => {
     it("parses nested fields and indexed values", () => {
